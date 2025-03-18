@@ -1,0 +1,16 @@
+C:\Users\shrir\source\repos\slipNumber 1 A\bin\Debug\net8.0-windows\slipNumber 1 A.exe
+C:\Users\shrir\source\repos\slipNumber 1 A\bin\Debug\net8.0-windows\slipNumber 1 A.deps.json
+C:\Users\shrir\source\repos\slipNumber 1 A\bin\Debug\net8.0-windows\slipNumber 1 A.runtimeconfig.json
+C:\Users\shrir\source\repos\slipNumber 1 A\bin\Debug\net8.0-windows\slipNumber 1 A.dll
+C:\Users\shrir\source\repos\slipNumber 1 A\bin\Debug\net8.0-windows\slipNumber 1 A.pdb
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber_1_A.Form1.resources
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.vbproj.GenerateResource.cache
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.AssemblyInfoInputs.cache
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.AssemblyInfo.vb
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.vbproj.CoreCompileInputs.cache
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.dll
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\refint\slipNumber 1 A.dll
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.pdb
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\slipNumber 1 A.genruntimeconfig.cache
+C:\Users\shrir\source\repos\slipNumber 1 A\obj\Debug\net8.0-windows\ref\slipNumber 1 A.dll

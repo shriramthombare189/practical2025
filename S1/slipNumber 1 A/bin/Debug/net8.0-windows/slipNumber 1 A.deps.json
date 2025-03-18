@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "slipNumber 1 A/1.0.0": {
+        "runtime": {
+          "slipNumber 1 A.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "slipNumber 1 A/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
