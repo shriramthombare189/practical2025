@@ -1,0 +1,225 @@
+ A) Write a java program to blink image on the Frame continuously.
+Solution:
+import java.awt.*;
+import java.awt.event.*;
+class slip8_1 extends Frame implements Runnable
+{
+    Thread t;
+    Label l1;
+    int f;
+slip8_1( )
+{
+    t=new Thread(this);
+    t.start( );
+    setLayout(null);
+    l1=new Label("Hello Java");
+    l1.setBounds(100,100,100,40);
+    add(l1);
+    setSize(300,300);
+    setVisible(true);
+    f=0;
+}
+public void run( )
+{
+    try
+    {
+        if(f==0)
+        {
+            t.sleep(200);
+            l1.setText(" ");
+            f=1;
+        }
+        if(f==1)
+    {
+        t.sleep(200);
+        l1.setText("hello java");
+        f=0;
+    }
+}
+catch(Exception e)
+{
+    System.out.println(e);
+}
+run( );
+}
+public static void main(String a[ ]) 
+{
+    new slip8_1( );
+}
+}
+-----------------
+B) Write a SERVLET program which counts how many times a user has visited a web page. If user is visiting the page for the first time, display a welcome message. If the user is revisiting the page, display the number of times visited. (Use Cookie)
+Solution:
+
+Index.html file:
+<html>
+<title>april</title>
+<body>
+<form name="f1" action="april" method="get">
+<!--<b>User Name : </b> <input type="text" name="s1"> <br><br>
+<b>Password : </b> <input type="text" name="s2"> <br><br>-->
+<input type="Submit" value="login " name="b1">
+</form>
+</body>
+</html>
+Web.xml file:
+<web-app>
+	<servlet>
+      <servlet-name>details</servlet-name>
+      <servlet-class>login</servlet-class>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>details</servlet-name>
+        <url-pattern>/april</url-pattern>
+    </servlet-mapping>
+</web-app>
+Login.java file:
+import jakarta.servlet.http.*;
+import jakarta.servlet.*;
+import java.io.*;
+
+
+public class login extends HttpServlet
+{
+public void doGet(
+HttpServletRequest req,
+HttpServletResponse res) throws
+IOException,ServletException
+{
+res.setContentType("text/html");
+PrintWriter out=res.getWriter();
+
+Cookie ca[]=req.getCookies();
+if(ca==null)
+{
+out.println("First Visit");
+Cookie visit=new Cookie("vcnt","1");
+visit.setMaxAge(24*3600);
+res.addCookie(visit);
+}
+else
+{
+int counter=Integer.parseInt(ca[0].getValue());
+counter++; //3  "3"
+out.println(counter +" Visit");
+ca[0].setValue(Integer.toString(counter));
+res.addCookie(ca[0]);
+}
+}
+}
+
+------------------------------------------------------
+
+A) Write ASP.Net program that displays the names of some flowers in two columns.
+
+Bind a label to the RadioButtonList so that when the user selects an option from the list
+
+and clicks on a button, the label displays the flower selected by the user.
+
+--->>
+
+
+
+-------------------------
+
+B) Write a VB.NET program to create movie table (Mv_Name, Release_year,
+
+Director). Insert the records (Max: 5). Delete the records of movies whose release year
+
+is 2022 and display appropriate message in message box.
+
+Answer :
+
+Imports System
+
+Imports System.Data
+
+Imports System.Data.OleDb
+
+ 
+
+Public Class Form1
+
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Saurabh\Desktop\New folder\movie.accdb")
+
+    Dim adpt As New OleDbDataAdapter("Select * from movie", con)
+
+    Dim cmd As New OleDbCommand
+
+    Dim ds As New DataSet
+
+    Public Function display()
+
+        adpt.Fill(ds, "movie")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "movie"
+
+        Return ds
+
+    End Function
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "insert into movie values('" & TextBox1.Text & "'," & TextBox2.Text & ",'" & TextBox3.Text & "')"
+
+        con.Open()
+
+ If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Inserted Successfully...!")
+
+        End If
+
+ 
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "DELETE FROM movie WHERE Release_year = " & TextBox2.Text
+
+        con.Open()
+
+  If cmd.ExecuteNonQuery() Then
+
+             MessageBox.Show("Deleted Successfully...!")
+
+         End If
+
+ 
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+End Class

@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shrir\\source\\repos\\Sleep Number 3 A\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4EDE0499-2557-48B9-892B-F8055D1425B1}|Sleep Number 3 A.csproj|c:\\users\\shrir\\source\\repos\\sleep number 3 a\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4EDE0499-2557-48B9-892B-F8055D1425B1}|Sleep Number 3 A.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4EDE0499-2557-48B9-892B-F8055D1425B1}|Sleep Number 3 A.csproj|c:\\users\\shrir\\source\\repos\\sleep number 3 a\\sleep number 3 a.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4EDE0499-2557-48B9-892B-F8055D1425B1}|Sleep Number 3 A.csproj|solutionrelative:sleep number 3 a.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Sleep Number 3 A.csproj",
+              "DocumentMoniker": "C:\\Users\\shrir\\source\\repos\\Sleep Number 3 A\\Sleep Number 3 A.csproj",
+              "RelativeDocumentMoniker": "Sleep Number 3 A.csproj",
+              "ToolTip": "C:\\Users\\shrir\\source\\repos\\Sleep Number 3 A\\Sleep Number 3 A.csproj",
+              "RelativeToolTip": "Sleep Number 3 A.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-03-19T05:00:03.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\shrir\\source\\repos\\Sleep Number 3 A\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\shrir\\source\\repos\\Sleep Number 3 A\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-19T04:31:06.186Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

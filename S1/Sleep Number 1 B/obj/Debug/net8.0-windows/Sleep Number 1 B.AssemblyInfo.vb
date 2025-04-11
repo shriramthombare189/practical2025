@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("Sleep Number 1 B"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+755f1ab3e7c35f66b227799bd16fb5f0efb672ee"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("Sleep Number 1 B"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("Sleep Number 1 B"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

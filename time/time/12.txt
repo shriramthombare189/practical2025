@@ -1,0 +1,198 @@
+A) Write a java program to count the number of records in a table.
+Solution:
+import java.sql.*;
+
+public class Slip12_q1
+{
+	public static void main(String args[])
+	{
+	Connection con;
+	Statement st;
+	String query;
+	ResultSet rs;
+
+	try
+	{
+		Class.forName("com.mysql.jdbc.Driver");
+
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
+		st=con.createStatement();
+
+		query="select * from emp";
+
+		rs=st.executeQuery(query);
+		int count=0;
+		while(rs.next())
+		{
+			count++;
+		}
+
+		System.out.println("The number of records are: "+count);
+		st.close();
+		con.close();
+	}
+	catch(Exception e)
+	{
+		System.out.println();
+	}
+	}
+}
+
+--------------------------------
+B) Write a program in java which will show lifecycle (creation, sleep, and dead) of a thread. Program should print randomly the name of thread and value of sleep time. The name of the thread should be hard coded through constructor. The sleep time of a thread will be a random integer in the range 0 to 4999.
+Solution:
+
+import java.util.*;
+ 
+class DemoThread extends Thread
+{
+	DemoThread(String nm)
+	{
+		super(nm);
+	}
+
+	public void run()
+	{
+	}
+
+}
+
+public class Slip12_q2
+{
+	public static void main(String args[]) throws InterruptedException
+	{
+	DemoThread t1=new DemoThread("EnumTech");
+	System.out.println(t1.getState());
+	t1.start();
+	System.out.println(t1.getState());
+	System.out.println("Thread is running");
+	System.out.println(t1.getName());
+	Random r=new Random();
+	int s=r.nextInt(5000);
+	System.out.println("Thread will sleeping for " + s + "millisecs"); 
+	try
+	{
+		t1.sleep(s);
+	}
+	catch(InterruptedException ie)
+	{
+	}
+	t1.join();
+	System.out.println("Thread is no more");
+	System.out.println(t1.getState());
+	}	
+}
+
+--------------------------
+A) Write ASP.Net program that displays a button in green color and it should change
+
+into yellow when the mouse moves over it.
+
+Answer :
+
+
+
+
+
+---------------------------
+
+B) Write a VB.NET program to create player table (PID, PName, Game,
+
+no_of_matches). Insert records and update number of matches of ‘Rohit Sharma’ and
+
+display result in data grid view.
+
+Answer :
+
+Imports System
+
+Imports System.Data
+
+Imports System.Data.OleDb
+
+ 
+
+Public Class Form1
+
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Saurabh\Desktop\New folder\player.accdb")
+
+    Dim adpt As New OleDbDataAdapter("Select * from player", con)
+
+    Dim cmd As New OleDbCommand
+
+    Dim ds As New DataSet
+
+    Public Function display()
+
+        adpt.Fill(ds, "player")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "player"
+
+        Return ds
+
+    End Function
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "insert into player values(" & TextBox1.Text & ",'" & TextBox2.Text & "','" & TextBox3.Text & "'," & TextBox4.Text & ")"
+
+        con.Open()
+
+If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Inserted Successfully...!")
+
+        End If
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "UPDATE player SET no_of_matches = " & TextBox4.Text & " WHERE PName = '" & TextBox2.Text & "'"
+
+        con.Open()
+
+        If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Updated Successfully...!")
+
+        End If
+
+        con.Close()
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+End Class
+---------------------------------------------

@@ -1,0 +1,16 @@
+C:\Users\shrir\source\repos\sleep Number 3 B\bin\Debug\net8.0-windows\sleep Number 3 B.exe
+C:\Users\shrir\source\repos\sleep Number 3 B\bin\Debug\net8.0-windows\sleep Number 3 B.deps.json
+C:\Users\shrir\source\repos\sleep Number 3 B\bin\Debug\net8.0-windows\sleep Number 3 B.runtimeconfig.json
+C:\Users\shrir\source\repos\sleep Number 3 B\bin\Debug\net8.0-windows\sleep Number 3 B.dll
+C:\Users\shrir\source\repos\sleep Number 3 B\bin\Debug\net8.0-windows\sleep Number 3 B.pdb
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep_Number_3_B.Form1.resources
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.vbproj.GenerateResource.cache
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.AssemblyInfoInputs.cache
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.AssemblyInfo.vb
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.vbproj.CoreCompileInputs.cache
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.dll
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\refint\sleep Number 3 B.dll
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.pdb
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\sleep Number 3 B.genruntimeconfig.cache
+C:\Users\shrir\source\repos\sleep Number 3 B\obj\Debug\net8.0-windows\ref\sleep Number 3 B.dll

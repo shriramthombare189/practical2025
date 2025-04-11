@@ -1,0 +1,212 @@
+A) Write a JSP script to accept username and password from user, if they are same then display “Login Successfully” message in Login.html file, otherwise display “Login Failed” Message in Error.html file.
+Solution:
+
+Index.html
+<html>
+<head>
+<title>Login Page</title>
+</head>
+<body>
+<form action="checkdetails.jsp">
+<legend>Enter User Id and Password...!!!</legend>
+UserId: <input type="text" name="id" /> <br><br>
+Password: <input type="text" name="pass" /> <br><br>
+<input type="submit" value="Sign In!!"/>
+</div>
+</form>
+</body>
+</html>
+
+Checkdetails.jsp
+<html>
+<head>
+<title>Check Credentials</title>
+</head>
+<body>
+<%
+        String uid=request.getParameter("id");
+        String password=request.getParameter("pass");
+        session.setAttribute("session-uid", uid);
+        if(uid.equals("Sofiya") && password.equals("Shaikh"))
+        {
+			response.sendRedirect("success.jsp");
+        }
+        else
+		{
+            response.sendRedirect("failed.jsp");
+        }
+        %>
+</body>
+</html>
+
+Success.jsp
+<html>
+<head><title>Success Page</title></head>
+<body>
+<%
+        String data=(String)session.getAttribute("session-uid");
+        out.println(" Login Successfully...!!!");
+        %>
+</body>
+</html>
+
+Failed.jsp
+<html>
+<head><title>Sign-in Failed Page</title></head>
+<body>
+<%
+        String data2=(String)session.getAttribute("session-uid");
+        out.println(" User Id and Password are wrong. Please try Again.");
+        %>
+</body>
+</html>
+---------------------------------------------------
+ B) Write a Java program to accept the details of students (rno, sname, per) at least 5 Records, store it into database and display the details of student having highest percentage. (Use PreparedStatement Interface)
+Solution:
+
+import java.util.*;
+import java.sql.*;  //step 1 - import the package
+
+public class Slip16_q2
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	PreparedStatement ps=null;
+	String query,query2;
+	Statement st;
+	ResultSet rs;
+	int nos;
+	int a,n,c;
+	String b;
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	Scanner sc = new Scanner(System.in);  
+	
+	System.out.println("Enter number of students: ");
+	nos = sc.nextInt();              
+ 
+	for(int i=1;i<=nos;i++)
+	{
+	System.out.println("Pls Enter ENO");  
+	a=sc.nextInt();						  	
+	System.out.println("Pls Enter ENAME");
+	b=sc.next();
+	System.out.println("Pls Enter SAL");
+	c=sc.nextInt();
+	
+	query="insert into student values(?,?,?)"; //step 4 - make the query
+		
+	ps=con.prepareStatement(query);  //step 5 create the statement
+	
+	ps.setString(1,b);
+	ps.setInt(2,a);
+	ps.setInt(3,c);
+	
+	n=ps.executeUpdate(); // step 6 fire the query
+	
+	
+	if(n>0)
+	System.out.println("RECORD INSERTED SUCCESSFULLY");
+	else
+	System.out.println("RECORD NOT INSERTED");
+	}
+	
+	ps.close();	
+	
+	st=con.createStatement();  //step 4 create the statement
+	
+	query2="select * from student where percentage=(select max(percentage) from student)"; //step 5 - make the query
+	
+	rs=st.executeQuery(query2); // step 6 fire the query
+	
+	System.out.println("DETAILS OF STUDENT HAVING MAXIMUM PERCENTAGE IS AS FOLLOWS");
+	while(rs.next())
+		{
+			System.out.println(rs.getInt("rno") + rs.getString("sname") + rs.getInt("percentage"));
+		}
+	st.close();	
+	con.close();
+	}
+	
+}
+
+--------------------------------------------------------------------------------
+1)Define a class supplier with fields – sid, name, address, pincode. Write a C#.Net Program to accept the details of ‘n’ suppliers and display it.
+--->>>
+
+
+
+
+-------------------
+
+ F) Define a class supplier with fields – sid, name, address, pincode. Write a C#.Net Program to accept the details of ‘n’ suppliers and display it.
+Solution:using System;
+
+namespace SupplierDetails
+{
+    // Define the Supplier class
+    class Supplier
+    {
+        public int Sid { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Pincode { get; set; }
+
+        // Constructor to initialize Supplier object
+        public Supplier(int sid, string name, string address, string pincode)
+        {
+            Sid = sid;
+            Name = name;
+            Address = address;
+            Pincode = pincode;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of suppliers: ");
+            int n = int.Parse(Console.ReadLine());
+            Supplier[] suppliers = new Supplier[n];
+
+            // Accept details of each supplier
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"\nEnter details for Supplier {i + 1}:");
+                Console.Write("Supplier ID: ");
+                int sid = int.Parse(Console.ReadLine());
+
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Address: ");
+                string address = Console.ReadLine();
+
+                Console.Write("Pincode: ");
+                string pincode = Console.ReadLine();
+
+                // Create a new Supplier object and store it in the array
+                suppliers[i] = new Supplier(sid, name, address, pincode);
+            }
+
+            // Display the details of all suppliers
+            Console.WriteLine("\nSupplier Details:");
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("Supplier ID\tName\t\tAddress\t\tPincode");
+            Console.WriteLine("-------------------------------------------------");
+
+            foreach (var supplier in suppliers)
+            {
+                Console.WriteLine($"{supplier.Sid}\t\t{supplier.Name}\t{supplier.Address}\t{supplier.Pincode}");
+            }
+
+            Console.WriteLine("-------------------------------------------------");
+        }
+    }
+}
+

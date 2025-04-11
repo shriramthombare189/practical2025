@@ -1,0 +1,128 @@
+A) Write a java program to display name and priority of a Thread.
+Solution:
+
+class Slip21
+{
+public static void main(String a[])
+{
+String S;
+int p;
+Thread t = Thread.currentThread();
+S = t.getName();
+System.out.println("\n Current Thread name : "+S);
+p = t.getPriority();
+System.out.println("\n Current thread priority : "+p);
+}
+}
+---------------------------------
+B) Write a SERVLET program in java to accept details of student (SeatNo, Stud_Name, Class, Total_Marks). Calculate percentage and grade obtained and display details on page.
+Solution:
+
+student.html
+<html>
+<body>
+<form name="f1" method="Post" action="http://localhost:8080/Stud">
+
+Enter Roll No :&nbsp <input type="text" name="txtsno"><br><br>
+Enter Name :&nbsp &nbsp <input type="text" name="txtnm"><br><br>
+Enter class :&nbsp &nbsp &nbsp <input type="text" name="txtclass"><br><br>
+Subject 1 :&nbsp &nbsp &nbsp <input type="text" name="txtsub1"><br><br>
+Subject 2 :&nbsp &nbsp &nbsp <input type="text" name="txtsub2"><br><br>
+Subject 3 :&nbsp &nbsp &nbsp <input type="text" name="txtsub3"><br><br>
+
+<input type="submit" value="Result">
+</div>
+</form>
+</body>
+</html>
+
+                
+student.java
+ import java.io.*;
+        import javax.servlet.*;
+        import javax.servlet.http.*;
+public class Student extends HttpServlet
+{
+    public void doPost(HttpServletRequest req,HttpServletResponse res)throws IOException,ServletException
+    {
+        int sno,s1,s2,s3,total;
+        String snm,sclass;
+        float per;
+         res.setContentType("text/html");
+        PrintWriter out=res.getWriter();
+        sno=Integer.parseInt(req.getParameter("txtsno"));
+        snm=req.getParameter("txtnm");
+        sclass=req.getParameter("txtclass");
+                s1=Integer.parseInt(req.getParameter("txtsub1"));
+        s2=Integer.parseInt(req.getParameter("txtsub2"));
+        s3=Integer.parseInt(req.getParameter("txtsub3"));
+        total=s1+s2+s3;
+        per=(total/3);
+        out.println("<html><body>");
+        out.print("<h2>Result of student</h2><br>");
+        out.println("<b><i>Roll No :</b></i>"+sno+"<br>");
+        out.println("<b><i>Name :</b></i>"+snm+"<br>");
+        out.println("<b><i>Class :</b></i>"+sclass+"<br>");
+        out.println("<b><i>Subject1:</b></i>"+s1+"<br>");
+        out.println("<b><i>Subject2:</b></i>"+s2+"<br>");
+        out.println("<b><i>Subject3:</b></i>"+s3+"<br>");
+        out.println("<b><i>Total :</b></i>"+total+"<br>");
+        out.println("<b><i>Percentage :</b></i>"+per+"<br>");
+        if(per<50)
+            out.println("<h1><i>Pass Class</i></h1>");
+        else if(per<55 && per>50)
+            out.println("<h1><i>Second class</i></h1>");
+        else if(per<60 && per>=55)
+            out.println("<h1><i>Higher class</i></h1>");
+        out.close();
+    }
+}
+----------------------------------------------------------
+A) Write a VB.NET program to accept sentences in text box and count the number of
+
+words and display the count in message box.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim str As String
+
+        str = TextBox1.Text
+
+        Dim I, Count As Integer
+
+        Dim arr() As Char = str.ToCharArray
+
+        For I = 0 To arr.Length - 1
+
+            If arr(I) = " " Then
+
+                Count = Count + 1
+
+            End If
+
+        Next
+
+        MsgBox(Count + 1 & " words")
+
+    End Sub
+
+End Class
+
+ :
+-----------------------------------------------------
+B) Write ASP.Net application for the following:
+
+ 1. Create a table EMP(eno, ename, edesignation, salary, joindate)
+
+ 2. Insert a Record.
+
+ 3. Update a record
+
+Answer :
+
+
+------------------------------------------------

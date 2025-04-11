@@ -1,0 +1,221 @@
+Q1) Write a Java program to accept a number through client terminal, send it to the
+Server, Server calculates its factors and sends it to the client.
+-->
+Server Code
+
+import java.io.*;
+import java.net.*;
+
+public class FactorServer {
+    public static void main(String[] args) {
+        int port = 12345; // Port number for the server
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server is listening on port " + port);
+
+            while (true) {
+                // Accept incoming client connection
+                Socket socket = serverSocket.accept();
+                System.out.println("New client connected");
+
+                // Create input and output streams
+                InputStream input = socket.getInputStream();
+                OutputStream output = socket.getOutputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                PrintWriter writer = new PrintWriter(output, true);
+
+                // Read the number from the client
+                String numberStr = reader.readLine();
+                int number = Integer.parseInt(numberStr);
+                System.out.println("Received number: " + number);
+
+                // Calculate factors
+                StringBuilder factors = new StringBuilder("Factors of " + number + ": ");
+                for (int i = 1; i <= number; i++) {
+                    if (number % i == 0) {
+                        factors.append(i).append(" ");
+                    }
+                }
+
+                // Send the factors back to the client
+                writer.println(factors.toString());
+
+                // Close the connection
+                socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+Client Code
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class FactorClient {
+    public static void main(String[] args) {
+        String hostname = "localhost"; // Server hostname
+        int port = 12345; // Server port number
+
+        try (Socket socket = new Socket(hostname, port)) {
+            System.out.println("Connected to the server");
+
+            // Create input and output streams
+            OutputStream output = socket.getOutputStream();
+            PrintWriter writer = new PrintWriter(output, true);
+            InputStream input = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+            // Accept a number from the user
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter a number: ");
+            int number = scanner.nextInt();
+
+            // Send the number to the server
+            writer.println(number);
+
+            // Read the factors from the server
+            String response = reader.readLine();
+            System.out.println(response);
+
+            // Close the scanner
+            scanner.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+----------------
+
+Q2)  Write a Java Program for the following: Assume database is already created.
+----->
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DDLApp extends JFrame implements ActionListener {
+
+    private JTextArea queryTextArea;
+    private JButton createTableButton, alterTableButton, dropTableButton;
+    private final String DB_URL = "jdbc:mysql://localhost:3306/your_database_name";
+    private final String USER = "your_username";
+    private final String PASS = "your_password";
+
+    public DDLApp() {
+        setTitle("DDL Operations");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // Text area for DDL queries
+        queryTextArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(queryTextArea);
+        add(scrollPane, BorderLayout.CENTER);
+
+        // Buttons panel
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        createTableButton = new JButton("Create Table");
+        alterTableButton = new JButton("Alter Table");
+        dropTableButton = new JButton("Drop Table");
+
+        //Add action listeners to buttons
+        createTableButton.addActionListener(this);
+        alterTableButton.addActionListener(this);
+        dropTableButton.addActionListener(this);
+
+        //Add buttons to panel
+        buttonPanel.add(createTableButton);
+        buttonPanel.add(alterTableButton);
+        buttonPanel.add(dropTableButton);
+
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == createTableButton || e.getSource() == alterTableButton || e.getSource() == dropTableButton) {
+            executeDDL(queryTextArea.getText());
+        }
+    }
+
+    private void executeDDL(String ddlQuery) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement()) {
+
+            stmt.execute(ddlQuery);
+            JOptionPane.showMessageDialog(this, "DDL query executed successfully.");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error executing DDL query: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(DDLApp::new);
+    }
+}
+-----------------------------
+Q5) Write a program in C#.Net to create a function to calculate the sum of the individual digits of a given number.
+-->
+using System;
+
+class Program
+{
+    // Function to calculate the sum of the individual digits of a number
+    static int SumOfDigits(int number)
+    {
+        int sum = 0;
+
+        // Convert the number to its absolute value to handle negative numbers
+        number = Math.Abs(number);
+
+        // Loop to extract each digit and add to sum
+        while (number > 0)
+        {
+            sum += number % 10; // Add the last digit to sum
+            number /= 10;       // Remove the last digit
+        }
+
+        return sum;
+    }
+
+    static void Main(string[] args)
+    {
+        Console.Write("Enter a number: ");
+        int number;
+
+        // Validate user input
+        while (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.Write("Please enter a valid integer: ");
+        }
+
+        // Call the SumOfDigits function and display the result
+        int result = SumOfDigits(number);
+        Console.WriteLine($"The sum of the individual digits of {number} is: {result}");
+    }
+}
+-------------------------
+B) Create a Web Application in ASP.Net to display all the Empname and Deptid of the
+
+employee from the database using SQL source control and bind it to GridView.
+
+Database fields are(DeptId, DeptName, EmpName, Salary).
+
+Create Table Alter Table Drop Table Type Your DDL Query Here
+
+Answer :
+
+
+
+--------------------

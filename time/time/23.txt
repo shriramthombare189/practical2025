@@ -1,0 +1,457 @@
+Q1) Write a Java Program to display the details of College(CID, CName, address, Year) on JTable.
+----->>>>
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
+public class CollegeDetails {
+
+    public static void main(String[] args) {
+        // Create the frame
+        JFrame frame = new JFrame("College Details");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        
+        // Create column names
+        String[] columnNames = {"CID", "CName", "Address", "Year"};
+        
+        // Create data for the table
+        Object[][] data = {
+            {"C001", "ABC College", "123 Main St, City", "2023"},
+            {"C002", "XYZ University", "456 Elm St, City", "2022"},
+            {"C003", "LMN Institute", "789 Oak St, City", "2021"},
+            {"C004", "PQR Academy", "101 Pine St, City", "2020"}
+        };
+        
+        // Create a table model and JTable
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+        
+        // Add the table to a JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);
+        
+        // Add the scroll pane to the frame
+        frame.add(scrollPane, BorderLayout.CENTER);
+        
+        // Set the frame visibility
+        frame.setVisible(true);
+    }
+}
+-----------------------------------------------
+Q2) Write a SERVLET application to accept username and password, search them into database, if found then display appropriate message on the browser otherwise display error message.
+--->
+
+
+
+
+
+
+
+
+------------------------------------------
+Q5) Write a program in C# to create a function to display the n terms of Fibonacci
+sequence.
+using System;
+
+class Program
+{
+    // Function to display the first n terms of the Fibonacci sequence
+    static void DisplayFibonacci(int n)
+    {
+        int firstTerm = 0, secondTerm = 1, nextTerm;
+
+        Console.WriteLine("Fibonacci Sequence:");
+
+        for (int i = 1; i <= n; i++)
+        {
+            Console.Write(firstTerm + " ");
+
+            // Calculate the next term
+            nextTerm = firstTerm + secondTerm;
+            firstTerm = secondTerm;
+            secondTerm = nextTerm;
+        }
+        Console.WriteLine(); // For a new line after the sequence
+    }
+
+    static void Main(string[] args)
+    {
+        Console.Write("Enter the number of terms in the Fibonacci sequence: ");
+        int n;
+
+        // Validate user input
+        while (!int.TryParse(Console.ReadLine(), out n) || n <= 0)
+        {
+            Console.Write("Please enter a positive integer: ");
+        }
+
+        // Call the function to display Fibonacci sequence
+        DisplayFibonacci(n);
+    }
+}
+----------------------------------
+
+B) Create the application in ASP.Net that accepts name, password ,age , email id, and
+
+user id. All the information entry is compulsory. Password should be reconfirmed. Age
+
+should be within 21 to 30. Email id should be valid. User id should have at least a
+
+capital letter and digit as well as length should be between 7 and 20 characters.
+
+Answer :
+
+<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="validationinasp._Default" %>
+
+
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+
+
+    <main>
+
+       
+
+
+
+   <table style="width: 66%;">
+
+   
+
+      <tr>
+
+         <td class="style1" colspan="3" align="center">
+
+         <asp:Label ID="lblmsg" 
+
+            Text="Registration Form" 
+
+            runat="server" />
+
+         </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3">
+
+            Candidate:
+
+         </td>
+
+
+
+         <td class="style2">
+
+            <asp:DropDownList ID="ddlcandidate" runat="server"  style="width:239px">
+
+               <asp:ListItem>Please Choose a Candidate</asp:ListItem>
+
+               <asp:ListItem>M H Kabir</asp:ListItem>
+
+               <asp:ListItem>Steve Taylor</asp:ListItem>
+
+               <asp:ListItem>John Abraham</asp:ListItem>
+
+               <asp:ListItem>Venus Williams</asp:ListItem>
+
+            </asp:DropDownList>
+
+         </td>
+
+
+
+         <td>
+
+            <asp:RequiredFieldValidator ID="rfvcandidate" 
+
+               runat="server" ControlToValidate ="ddlcandidate"
+
+               ErrorMessage="Please choose a candidate" 
+
+               InitialValue="Please choose a candidate">
+
+            </asp:RequiredFieldValidator>
+
+         </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3">
+
+            House:
+
+         </td>
+
+
+
+         <td class="style2">
+
+            <asp:RadioButtonList ID="rblhouse" runat="server" RepeatLayout="Flow">
+
+               <asp:ListItem>Red</asp:ListItem>
+
+               <asp:ListItem>Blue</asp:ListItem>
+
+               <asp:ListItem>Yellow</asp:ListItem>
+
+               <asp:ListItem>Green</asp:ListItem>
+
+            </asp:RadioButtonList>
+
+         </td>
+
+
+
+         <td>
+
+            <asp:RequiredFieldValidator ID="rfvhouse" runat="server" 
+
+               ControlToValidate="rblhouse" ErrorMessage="Enter your house name" >
+
+            </asp:RequiredFieldValidator>
+
+            <br />
+
+         </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3">
+
+            Class:
+
+         </td>
+
+
+
+         <td class="style2">
+
+            <asp:TextBox ID="txtclass" runat="server"></asp:TextBox>
+
+         </td>
+
+
+
+         <td>
+
+            <asp:RangeValidator ID="rvclass" 
+
+               runat="server" ControlToValidate="txtclass" 
+
+               ErrorMessage="Enter your class (6 - 12)" MaximumValue="12" 
+
+               MinimumValue="6" Type="Integer">
+
+            </asp:RangeValidator>
+
+         </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3">
+
+            Email:
+
+         </td>
+
+
+
+         <td class="style2">
+
+            <asp:TextBox ID="txtemail" runat="server" style="width:250px">
+
+            </asp:TextBox>
+
+         </td>
+
+
+
+         <td>
+
+            <asp:RegularExpressionValidator ID="remail" runat="server" 
+
+               ControlToValidate="txtemail" ErrorMessage="Enter your email" 
+
+               ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+
+            </asp:RegularExpressionValidator>
+
+         </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" style="height: 21px">
+
+             Password:</td>
+
+
+
+         <td class="style2" style="height: 21px">
+
+          
+
+
+
+             <asp:TextBox ID="TextBox2" runat="server"  TextMode="Password"></asp:TextBox></td>
+
+
+
+         <td style="height: 21px">
+
+         <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="CompareValidator"
+
+        ControlToCompare="TextBox2" ControlToValidate="TextBox3">*password must match with confirm password</asp:CompareValidator></td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" style="height: 21px">
+
+             Confirm Password:</td>
+
+
+
+         <td class="style2">
+
+           <asp:TextBox ID="TextBox3" runat="server"  TextMode="Password"></asp:TextBox></td>
+
+
+
+         </td>
+
+             <td>
+
+
+
+             </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" style="height: 21px">
+
+             Name:</td>
+
+
+
+         <td class="style2">
+
+             <asp:TextBox ID="TextBox4" runat="server" ></asp:TextBox>&nbsp;</td>
+
+
+
+             <td>
+
+
+
+              <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Name is required"
+
+           ControlToValidate="TextBox4">*Name is required</asp:RequiredFieldValidator>  &nbsp;
+
+                 <asp:RegularExpressionValidator ID="revEmail" 
+
+ValidationExpression="^[a-zA-Z]*$" ControlToValidate="TextBox4"
+
+runat="server">enter only alphabets</asp:RegularExpressionValidator>
+
+             </td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" style="height: 21px">
+
+             Enter Number</td>
+
+
+
+         <td class="style2">
+
+             <asp:TextBox ID="TextBox8" runat="server" ></asp:TextBox>&nbsp;</td>&nbsp;</td>
+
+
+
+             <td>
+
+
+
+                 &nbsp;</td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" style="height: 21px">
+
+             &nbsp;</td>
+
+
+
+         <td class="style2">
+
+             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+
+          </td>
+
+
+
+             <td>
+
+
+
+                 &nbsp;</td>
+
+      </tr>
+
+
+
+      <tr>
+
+         <td class="style3" align="center" colspan="3">
+
+             &nbsp;</td>
+
+      </tr>
+
+   </table>
+
+
+
+    </main>
+
+
+
+</asp:Content>

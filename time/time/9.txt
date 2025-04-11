@@ -1,0 +1,168 @@
+A) Write a java Program in Hibernate to display “Hello world” message.
+Solution:
+import java.util.*;
+import java.sql.*;  //step 1 - import the package
+
+public class InsertPreparedStatement
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	PreparedStatement ps;
+	String query;
+	
+	int a;
+	String b;
+	float c;
+	
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Pls Enter ENO");  
+	a=sc.nextInt();						  	
+	System.out.println("Pls Enter ENAME");
+	b=sc.next();
+	System.out.println("Pls Enter SAL");
+	c=sc.nextFloat();
+	
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	query="insert into emp values(?,?,?)"; //step 4 - make the query
+		
+	ps=con.prepareStatement(query);  //step 5
+	create the statement
+	
+	ps.setInt(1,a);
+	ps.setString(2,b);
+	ps.setFloat(3,c);
+	
+	int n=ps.executeUpdate(); // step 6 fire the query
+	if(n==1)
+	System.out.println("RECORD INSERTED SUCCESSFULLY");
+	else
+	System.out.println("RECORD NOT INSERTED");
+	
+	ps.close();		//step 7 close the statement and connections
+	con.close();
+	
+	}
+}
+------------------------------------------
+ B) Write a SERVLET program to display the details of Product (ProdCode, PName, Price) on the browser in tabular format. (Use database)
+Solution:
+Slip3a.html
+<html>
+<body>
+<h2>Page1</h2>
+<form method="GET" action="slip3a.jsp">
+<input type=checkbox name="item" value=200>BOOK(200)<br>
+<input type=checkbox name="item" value=150>CD(150)<br>
+<input type=checkbox name="item" value=220>SOFTTOY(220)<br><br>
+<input type=submit value="SUBMIT">
+<input type=reset>
+</form>
+</body>
+</html>
+Slip3a.jsp
+<html>
+<body>
+<% 
+int sum=0;
+String []values=request.getParameterValues("item");
+if(values!=null)
+{
+	for(int i=0;i<values.length;i++)
+	{
+		sum=sum+Integer.parseInt(values[i]);
+	}
+}
+session.setAttribute("p1",sum);
+response.sendRedirect("slip3b.html");
+%>
+</body>
+</html>
+Slip3b.html
+<html>
+<body>
+<h2>Page2</h2>
+<form method="GET" action="slip3b.jsp">
+<input type=checkbox name="item" value=12000>PRINTER(12000)<br>
+<input type=checkbox name="item" value=220>PENDRIVE(220)<br>
+<input type=checkbox name="item" value=1200>RAM(1200)<br><br>
+<input type=submit value="SUBMIT">
+<input type=reset>
+</form>
+</body>
+</html>
+Slip3b.jsp
+<html>
+<body>
+<% 
+int sum1=((Integer)session.getAttribute("p1")).intValue();
+int sum2=0;
+String []values=request.getParameterValues("item");
+if(values!=null)
+{
+	for(int i=0;i<values.length;i++)
+	{
+		sum2=sum2+Integer.parseInt(values[i]);
+	}
+}
+int total=sum1+sum2;
+out.println("<html>");
+out.println("<h2>Summary</h2>");
+out.println("sum of Page 1:   "+sum1);
+out.println("<br>");
+out.println("Sum of Page 2:   "+sum2);
+out.println("<br>");
+out.println("Total Bill"+total);
+out.println("</body>");
+out.println("</html>");
+%>
+</body>
+</html>
+
+=------------------------------------------------
+E) Write a program that demonstrates the use of primitive data types in C#. The program should also support the type conversion of : ● Integer to String ● String to Integer
+Solution:
+
+using System;
+
+class Program {
+    static void Main(string[] args) {
+        // Demonstrate primitive data types
+        bool isTrue = true;
+        char letter = 'a';
+        int number = 10;
+        float decimalNumber = 3.14f;
+        double bigDecimalNumber = 99999999.99999999;
+        decimal preciseDecimalNumber = 1.23456789m;
+
+        Console.WriteLine("Boolean: " + isTrue);
+        Console.WriteLine("Character: " + letter);
+        Console.WriteLine("Integer: " + number);
+        Console.WriteLine("Float: " + decimalNumber);
+        Console.WriteLine("Double: " + bigDecimalNumber);
+        Console.WriteLine("Decimal: " + preciseDecimalNumber);
+
+        // Convert integer to string
+        int intNumber = 123;
+        string strNumber = intNumber.ToString();
+        Console.WriteLine("Integer converted to string: " + strNumber);
+
+        // Convert string to integer
+        string strNumber2 = "456";
+        int intNumber2 = Int32.Parse(strNumber2);
+        Console.WriteLine("String converted to integer: " + intNumber2);
+    }
+}
+----------------------------
+B) Create an application in ASP.Net that allows the user to enter a number in the
+
+textbox named "getnum". Check whether the number in the textbox "getnum" is
+
+palindrome or not. Print the message accordingly in the label control named lbldisplay
+
+when the user clicks on the button "check".
+--->>

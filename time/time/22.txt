@@ -1,0 +1,212 @@
+A) Write a java program to display Date and Time of Server machine on client machine.
+Solution:
+
+Client code:
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+class s14q1Client
+{
+	public static void main(String[] a)throws IOException
+	{
+		Socket st=new Socket("localhost",5917);
+		DataInputStream dis=new DataInputStream(st.getInputStream());
+		String d=dis.readUTF()+"";
+		System.out.println("date:"+d);
+	}
+
+}
+
+Server code:
+import java.net.*;
+import java.io.*;
+import java.util.*;
+
+class s14q1Server
+{
+	public static void main(String[] a)throws IOException
+	{
+		ServerSocket st=new ServerSocket(5917);
+		Socket s= st.accept();
+		DataOutputStream dos=new DataOutputStream(s.getOutputStream());
+		Date d=new Date();
+		System.out.println("date:"+d);
+		dos.writeUTF(d+"");
+	}
+
+}
+-------------------------------------------
+Slip 22 - B) Write a JSP program to accept the details of Account (ANo, Type, Bal) and store it into database and display it in tabular form.
+Solution:
+
+//saveAccount.html
+<html>
+<body>
+<form method='post' action='saveAccount.jsp'>
+<table>
+<tr>
+            <td><b>Account No:</b></td>
+            <td><input type='text' name='ano'></td>
+</tr>
+<tr>
+            <td><b>Account Type:</b></td>
+            <td>
+            <select name='type'>
+            <option value=''>Select Type</option>
+            <option value='Saving'>Saving</option>
+            <option value='Current'>Current</option>
+            </select>
+            </td>
+</tr>
+<tr><td><b>Balance:</b></td><td><input type='text' name='bal'></td></tr>
+<tr><td><input type='submit'></td><td><input type='reset'></td></tr>
+</table>
+</form>
+<a href='view_accounts.jsp'>View Accounts</a>
+</body>
+</html>
+
+//saveAccount.jsp
+<%@page import="java.sql.*" errorPage="err.jsp"%>
+
+<%
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
+
+int ano = Integer.parseInt(request.getParameter("ano"));
+String type = request.getParameter("type");
+float bal = Float.parseFloat(request.getParameter("bal"));
+PreparedStatement ps = con.prepareStatement("insert into account values(?,?,?)");
+ps.setInt(1,ano);
+ps.setString(2,type);
+ps.setFloat(3,bal);
+ps.executeUpdate();
+%>
+Account created successfully.<br>
+<a href='SaveAccount.html'>Add Account</a> <a href='view_accounts.jsp'>View Accounts</a>
+
+//view_accounts.jsp
+<%@page import="java.sql.*"%>
+
+<%
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
+Statement s = con.createStatement();
+ResultSet rs = s.executeQuery("select * from account");
+%>
+<table border=1>
+<tr><th>Account No</th><th>Type</th><th>Balance</th></tr>
+<%
+while(rs.next()){
+%>
+<tr><td><%=rs.getInt(1)%></td><td><%=rs.getString(2)%></td><td><%=rs.getFloat(3)%></td>
+</tr>
+<%
+            }
+%>
+</table><br>
+<a href='SaveAccount.html'>Home</a>
+
+//err.jsp
+<%@page isErrorPage="true"%>
+Error:<%=exception%><br>
+<a href='SaveAccount.html'>Home</a>
+----------------------------------------------------------
+A) Write a program in C# to create a function to swap the values of two integers.
+--->
+using System;
+
+class Program
+{
+    // Function to swap two integers
+    static void Swap(ref int a, ref int b)
+    {
+        int temp = a; // Store the value of a in a temporary variable
+        a = b;        // Assign the value of b to a
+        b = temp;     // Assign the value of temp (original a) to b
+    }
+
+    static void Main(string[] args)
+    {
+        // Declare two integers
+        int num1 = 5;
+        int num2 = 10;
+
+        // Display the values before swapping
+        Console.WriteLine("Before swapping:");
+        Console.WriteLine($"num1 = {num1}, num2 = {num2}");
+
+        // Call the Swap function
+        Swap(ref num1, ref num2);
+
+        // Display the values after swapping
+        Console.WriteLine("After swapping:");
+        Console.WriteLine($"num1 = {num1}, num2 = {num2}");
+    }
+}
+-------------------------------------
+B) Write a Vb.net program to design the following form; it contains the three menus
+
+Color (Red, Blue, and Green), Window (Maximize, Minimize, and Restore) and Exit.
+
+On Selection of any menu or submenu result should affect the form control( for
+
+example if user selected Red color from Color menu back color of form should get
+
+changed to Red and if user selected Maximize from Window Menu then form should
+
+get maximized).
+
+Answer :
+
+Public Class Form1
+
+    Private Sub RedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RedToolStripMenuItem.Click
+
+        Me.BackColor = Color.Red
+
+    End Sub
+
+ 
+
+    Private Sub GreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenToolStripMenuItem.Click
+
+        Me.BackColor = Color.Green
+
+    End Sub
+
+ 
+
+    Private Sub BlueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlueToolStripMenuItem.Click
+
+        Me.BackColor = Color.Blue
+
+    End Sub
+
+ 
+
+    Private Sub MaximizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MaximizeToolStripMenuItem.Click
+
+        Me.WindowState = FormWindowState.Maximized
+
+    End Sub
+
+ 
+
+    Private Sub MiniMToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MiniMToolStripMenuItem.Click
+
+        Me.WindowState = FormWindowState.Minimized
+
+    End Sub
+
+ 
+
+    Private Sub RestoreToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RestoreToolStripMenuItem.Click
+
+        Me.WindowState = FormWindowState.Normal
+
+    End Sub
+
+End Class
+

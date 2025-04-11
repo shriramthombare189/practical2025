@@ -1,0 +1,198 @@
+A) Write a JSP program to accept Name and Age of Voter and check whether he is eligible for voting or not.
+Solution:
+
+
+Slip18.html
+<html>
+<form method="post" action="slip18.jsp">
+Enter name:<input type="text" name="name">
+Enter age:<input type="text" name="age">
+
+<input type="submit" value="Check">
+</form>
+</html>
+Slip18.jsp	
+<html>
+	<body>
+		<font color=red>
+		<%
+			String name=request.getParameter("name");
+			String age=request.getParameter("age");
+
+			int ag=Integer.parseInt(age);
+			if(ag>=18)
+				out.println("voter is eligiable for voting");
+			else
+				out.println("voter is not eligiable for voting");
+			
+		%>
+</font>
+</body>
+</html>
+
+----------------------------------------------
+2) Write a Java program to display given extension files from a specific directory on server machine.
+Solution:
+import java.io.File;
+import java.util.Scanner;
+
+public class FileExtensionLister {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user for directory path
+        System.out.print("Enter the directory path: ");
+        String directoryPath = scanner.nextLine();
+
+        // Prompt user for file extension
+        System.out.print("Enter the file extension (e.g., .txt, .jpg): ");
+        String fileExtension = scanner.nextLine();
+
+        // Create a File object for the directory
+        File directory = new File(directoryPath);
+
+        // Check if the directory exists and is indeed a directory
+        if (directory.exists() && directory.isDirectory()) {
+            // List files with the specified extension
+            System.out.println("Files with extension " + fileExtension + " in directory " + directoryPath + ":");
+            File[] files = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(fileExtension.toLowerCase()));
+
+            if (files != null && files.length > 0) {
+                for (File file : files) {
+                    System.out.println(file.getName());
+                }
+            } else {
+                System.out.println("No files found with the specified extension.");
+            }
+        } else {
+            System.out.println("The specified path is not a valid directory.");
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+------------------------
+A) Write a program in C#.Net to find the sum of all elements of the array.
+
+Answer :
+using System;
+
+namespace SumOfArrayElements
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Prompt user for the number of elements
+            Console.Write("Enter the number of elements in the array: ");
+            int n = int.Parse(Console.ReadLine());
+
+            // Declare the array
+            int[] array = new int[n];
+
+            // Input elements into the array
+            Console.WriteLine("Enter the elements of the array:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"Element {i + 1}: ");
+                array[i] = int.Parse(Console.ReadLine());
+            }
+
+            // Calculate the sum of the array elements
+            int sum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                sum += array[i];
+            }
+
+            // Display the sum
+            Console.WriteLine($"The sum of all elements in the array is: {sum}");
+        }
+    }
+}
+-----------------------------------
+B) Write a C#.Net Program to define a class Person having members –name, address.
+
+Create a subclass called employee with member staffed, salary. Create ‘n’ objects of the
+
+Employee class and display all the details of the Employee.
+
+___>>>
+using System;
+
+namespace EmployeeDetails
+{
+    // Base class
+    class Person
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+
+        // Constructor
+        public Person(string name, string address)
+        {
+            Name = name;
+            Address = address;
+        }
+    }
+
+    // Subclass
+    class Employee : Person
+    {
+        public string Staffed { get; set; }
+        public decimal Salary { get; set; }
+
+        // Constructor
+        public Employee(string name, string address, string staffed, decimal salary)
+            : base(name, address)
+        {
+            Staffed = staffed;
+            Salary = salary;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of employees: ");
+            int n = int.Parse(Console.ReadLine());
+
+            Employee[] employees = new Employee[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"\nEnter details for Employee {i + 1}:");
+
+                Console.Write("Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Address: ");
+                string address = Console.ReadLine();
+
+                Console.Write("Staffed (e.g., Full-time, Part-time): ");
+                string staffed = Console.ReadLine();
+
+                Console.Write("Salary: ");
+                decimal salary = decimal.Parse(Console.ReadLine());
+
+                // Create a new Employee object
+                employees[i] = new Employee(name, address, staffed, salary);
+            }
+
+            // Display all employee details
+            Console.WriteLine("\nEmployee Details:");
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("Name\t\tAddress\t\tStaffed\t\tSalary");
+            Console.WriteLine("-------------------------------------------------");
+
+            foreach (var employee in employees)
+            {
+                Console.WriteLine($"{employee.Name}\t{employee.Address}\t{employee.Staffed}\t{employee.Salary:C}");
+            }
+
+            Console.WriteLine("-------------------------------------------------");
+        }
+    }
+}

@@ -1,0 +1,180 @@
+A) Write a Java Program to delete details of students whose initial character of their name is ‘S’.
+Solution:
+
+import java.sql.*;  //step 1 - import the package
+
+public class DeleteStudent
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	Statement st;
+	String query;
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	st=con.createStatement();  //step 4 create the statement
+	
+	query="delete from college where Name like 'S%'"; //step 5 - make the query
+	
+	int n=st.executeUpdate(query); // step 6 fire the query
+	if(n>0)
+	System.out.println(n+" RECORDs DELETED SUCCESSFULLY");
+	else
+	System.out.println("RECORD NOT DELETED");
+	
+	st.close();		//step 7 close the statement and connections
+	con.close();
+	
+	}
+}
+---------------------------------------
+B) Write a SERVLET program that provides information about a HTTP request from a client, such as IP address and browser type. The servlet also provides information about the server on which the servlet is running, such as the operating system type, and the names of currently loaded servlets.
+Solution:
+
+// index.html
+<html>
+<head>
+<title>Slip 4</title>
+</head>
+<body>
+
+<form name="f1" action="sofiya" method="get" >
+  <p>  <input type="Submit" value="Submit" name="B1"></p>
+</form>
+
+</body>
+
+</html>
+
+//web.xml
+<web-app>
+
+	<servlet>
+      <servlet-name>girl</servlet-name>
+      <servlet-class>Slip4</servlet-class>
+    </servlet>
+	<servlet-mapping>
+        <servlet-name>girl</servlet-name>
+        <url-pattern>/sofiya</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+Slip4.java
+import java.util.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+
+public class Slip4 extends HttpServlet
+{
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+	throws IOException, ServletException
+	{
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<body>");
+        out.println("<head>");
+        out.println("<title>Request Information</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h3>Request Information</h3><br>");
+        out.println("Method: " + request.getMethod()+"<br>");
+        out.println("Request URI: " + request.getRequestURI()+"<br>");
+        out.println("Protocol: " + request.getProtocol()+"<br>");
+        out.println("PathInfo: " + request.getPathInfo()+"<br>");
+        out.println("Remote Address: " + request.getRemoteAddr()+"<br>");
+        out.println("Remote Host: " + request.getRemoteHost()+"<br>");
+        out.println("Remote User: " + request.getRemoteUser()+"<br>");
+        Enumeration e = request.getHeaderNames();
+        while (e.hasMoreElements())
+        {
+            String name = (String)e.nextElement();
+            String value = request.getHeader(name);
+            out.println(name + " : " + value+"<br>");
+        }
+        out.println("<h3>Server Information</h3><br>");
+	out.println("getServerName(): " + request.getServerName()+"<br>");
+	out.println("getServerPort(): " + request.getServerPort()+"<br>");
+	out.println("getServletContext().getServerInfo(): " + getServletContext().getServerInfo()+"<br>");
+	out.println("getServerInfo() name: " + getServerInfoName(getServletContext().getServerInfo())+"<br>");
+	out.println("getServerInfo() version: " + getServerInfoVersion(getServletContext().getServerInfo())+"<br>");
+	out.println("getServletContext().getAttribute(\"attribute\"): " + getServletContext().getAttribute("attribute")+"<br>");
+
+	ServletContext context = getServletContext();
+	Enumeration names = context.getServletNames();
+	while (names.hasMoreElements())
+	{
+		String name = (String)names.nextElement();
+		Servlet servlet = context.getServlet(name);
+		out.println("Servlet name: " + name+"<br>");
+		out.println("Servlet class: " + servlet.getClass().getName()+"<br>");
+		out.println("Servlet info: " + servlet.getServletInfo()+"<br>");
+	}
+        out.println("</body>");
+        out.println("</html>");
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws IOException, ServletException
+    {
+        doGet(request, response);
+    }
+
+
+	private String getServerInfoName(String serverInfo)
+	{
+	int slash = serverInfo.indexOf('/');
+	if (slash == -1)
+		return serverInfo;
+	else 
+		return serverInfo.substring(0, slash);
+	}
+
+	private String getServerInfoVersion(String serverInfo)
+	{
+	int slash = serverInfo.indexOf('/');
+	if (slash == -1) 
+		return null;
+	else 
+		return serverInfo.substring(slash + 1);
+	}
+
+}
+-----------------------------------------
+A) Design a VB.net form to pick a date from DateTimePicker Control and display day,
+
+month and year in separate text boxes.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Label1.Text = "Year : " & DateTimePicker1.Value.Year
+
+        Label2.Text = "Month : " & DateTimePicker1.Value.Month
+
+        Label3.Text = "Day : " & DateTimePicker1.Value.Day
+
+    End Sub
+
+End Class
+
+ 
+
+ :
+-----------------------------------------
+4) Create a web application to insert 3 records inside the SQL database table having
+
+following fields ( DeptId, DeptName, EmpName, Salary). Update the salary for any one
+
+employee and increment it to 15% of the present salary. Perform delete operation on
+
+one row of the database table.
+->>>
+

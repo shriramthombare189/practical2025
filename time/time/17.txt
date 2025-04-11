@@ -1,0 +1,257 @@
+A) Write a java program to accept a String from user and display each vowel from a String after 3 seconds.
+Solution:
+
+import java.util.Scanner;
+
+public class VowelDisplay {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Accept a string from the user
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+
+        // Loop through each character in the string
+        for (char ch : input.toCharArray()) {
+            // Check if the character is a vowel
+            if (isVowel(ch)) {
+                System.out.print(ch + " "); // Print the vowel
+                try {
+                    Thread.sleep(3000); // Sleep for 3000 milliseconds (3 seconds)
+                } catch (InterruptedException e) {
+                    System.out.println("Thread was interrupted: " + e.getMessage());
+                }
+            }
+        }
+
+        // Close the scanner
+        scanner.close();
+    }
+
+    // Method to check if a character is a vowel
+    private static boolean isVowel(char ch) {
+        return "AEIOUaeiou".indexOf(ch) != -1; // Check if the character is in the list of vowels
+    }
+}
+-
+------------------------------------------------
+B) Write a Java program to check whether given file is present on server or not, if it is there then display its contents on client’s terminal otherwise display the message “File Not Found”.
+Solution:
+
+ Server Code
+import java.io.*;
+import java.net.*;
+
+public class FileServer {
+    public static void main(String[] args) {
+        int port = 12345; // Port number for the server
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server is listening on port " + port);
+
+            while (true) {
+                Socket socket = serverSocket.accept();
+                System.out.println("Client connected");
+
+                // Handle client in a separate thread
+                new Thread(new FileHandler(socket)).start();
+            }
+        } catch (IOException e) {
+            System.out.println("Server exception: " + e.getMessage());
+        }
+    }
+}
+
+class FileHandler implements Runnable {
+    private Socket socket;
+
+    public FileHandler(Socket socket) {
+        this.socket = socket;
+    }
+
+    @Override
+    public void run() {
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             PrintWriter output = new PrintWriter(socket.getOutputStream(), true)) {
+
+            // Read the file name from the client
+            String fileName = input.readLine();
+            File file = new File(fileName);
+
+            if (file.exists() && !file.isDirectory()) {
+                // File exists, read its contents
+                BufferedReader fileReader = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = fileReader.readLine()) != null) {
+                    output.println(line);
+                }
+                fileReader.close();
+            } else {
+                // File not found
+                output.println("File Not Found");
+            }
+        } catch (IOException e) {
+            System.out.println("Exception in FileHandler: " + e.getMessage());
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                System.out.println("Could not close socket: " + e.getMessage());
+            }
+        }
+    }
+}
+
+ Client Code
+import java.io.*;
+import java.net.*;
+
+public class FileClient {
+    public static void main(String[] args) {
+        String hostname = "localhost"; // Server hostname
+        int port = 12345; // Server port number
+
+        try (Socket socket = new Socket(hostname, port);
+             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
+             BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+             BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in))) {
+
+            // Read the file name from the user
+            System.out.print("Enter the file name to check: ");
+            String fileName = consoleInput.readLine();
+
+            // Send the file name to the server
+            output.println(fileName);
+
+            // Read the response from the server
+            String response;
+            while ((response = input.readLine()) != null) {
+                System.out.println(response);
+            }
+        } catch (IOException e) {
+            System.out.println("Client exception: " + e.getMessage());
+        }
+    }
+}
+--------------------------------------------------
+E) Write a C#.Net application to display the vowels from a given String.
+Solution:
+using System;
+
+namespace VowelDisplay
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Prompt the user to enter a string
+            Console.Write("Enter a string: ");
+            string input = Console.ReadLine();
+
+            // Call the method to display vowels
+            DisplayVowels(input);
+        }
+
+        static void DisplayVowels(string input)
+        {
+            // Define a string containing all vowels
+            string vowels = "AEIOUaeiou";
+            bool foundVowel = false;
+
+            Console.WriteLine("Vowels in the given string:");
+
+            // Loop through each character in the input string
+            foreach (char ch in input)
+            {
+                // Check if the character is a vowel
+                if (vowels.IndexOf(ch) >= 0)
+                {
+                    Console.Write(ch + " "); // Print the vowel
+                    foundVowel = true;
+                }
+            }
+
+            // If no vowels were found, display a message
+            if (!foundVowel)
+            {
+                Console.WriteLine("No vowels found in the given string.");
+            }
+            else
+            {
+                Console.WriteLine(); // New line after displaying vowels
+            }
+        }
+    }
+}
+-------------------------------
+B) Write a VB.NET program to accept the details of product (PID, PName,
+
+expiry_date, price). Store it into the database and display it on data grid view.
+
+Answer :
+
+Imports System
+
+Imports System.Data
+
+Imports System.Data.OleDb
+
+ 
+
+Public Class Form1
+
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Saurabh\Desktop\New folder\product.accdb")
+
+    Dim adpt As New OleDbDataAdapter("Select * from product", con)
+
+    Dim cmd As New OleDbCommand
+
+    Dim ds As New DataSet
+
+    Public Function display()
+
+        adpt.Fill(ds, "product")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "product"
+
+        Return ds
+
+    End Function
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+ 
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "insert into product values(" & TextBox1.Text & ",'" & TextBox2.Text & "','" & DateTimePicker1.Value & "'," & TextBox4.Text & ")"
+
+        con.Open()
+
+        If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Inserted Successfully...!")
+
+        End If
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+End Class
+------------------------------

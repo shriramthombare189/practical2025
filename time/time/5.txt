@@ -1,0 +1,187 @@
+A) Write a JSP program to calculate sum of first and last digit of a given number. Display sum in Red Color with font size 18.
+Solution:
+
+Slip5.html
+<html>
+      <head>
+            <title> Slip 5
+            </title>
+	  </head>
+	  <body>
+	  <form name="f1" method="post" action="slip5.jsp">
+	  Enter The Number:<input type="text" name="tname"><br>
+	 <input type="submit" name="s1" value="Show">
+	 
+</form>
+
+
+ </body>
+</html>
+
+Slip 5.jsp
+
+<html>
+	<body>
+		<font color="red" size="18">
+		<%
+			int n=Integer.parseInt(request.getParameter("tname"));
+			int ld=n%10;
+			while(n>9)
+				n=n/10;
+			
+			int fd=n;
+			int sum=fd+ld;
+			out.println(sum);
+			
+		%>
+		</font>
+	</body>
+</html>
+Web.xml
+<web-app>
+ <welcome-file-list>
+	<welcome-file>slip5.html</welcome-file>
+ </welcome-file-list>
+</web-app>
+--------------------------------
+B) Write a java program in multithreading using applet for Traffic signal.
+Solution:
+import java.applet.*;
+import java.awt.*;
+
+
+public class Slip333 extends Applet implements Runnable
+{
+	static int x;
+	
+	public void init()
+	{
+	Thread tx=new Thread(this);
+	tx.start();
+	}
+	
+	public void run()
+	{
+	repaint();
+	}
+	public void paint(Graphics g)
+	{
+	g.drawRect(100,100,200,400);
+	g.drawOval(120,120,100,100);//red
+	g.drawOval(120,240,100,100);//yellow
+	g.drawOval(120,360,100,100);//green
+		if(x==0)
+		{
+			g.setColor(Color.red);
+			g.fillOval(120,120,100,100);
+			x=1;
+		}
+		
+		else if(x==1)
+		{
+			g.setColor(Color.yellow);
+			g.fillOval(120,240,100,100);
+			x=2;
+		}
+		
+		else if(x==2)
+		{
+			g.setColor(Color.green);
+			g.fillOval(120,360,100,100);
+			x=0;
+		}
+		
+		try{
+		if(x==1){Thread.sleep(5000);}
+		else if(x==2){Thread.sleep(1000);}
+		else if(x==0){Thread.sleep(5000);}
+		}
+		catch(Exception e){}
+		repaint();
+	}
+}
+
+-------------------------------
+ A) Write a VB.NET program to accept a character from keyboard and check whether it
+
+ is vowel or consonant. Also display the case of that character.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim a As Char
+
+        Dim str As String
+
+        a = TextBox1.Text
+
+ 
+
+        If (TextBox1.Text.Length <= 1) Then
+
+            If Char.IsUpper(a) Then
+
+                str = "Upper Case"
+
+            Else
+
+                str = "Lower Case"
+
+            End If
+
+            If (a = "a" Or a = "e" Or a = "i" Or a = "o" Or a = "u" Or
+
+                a = "A" Or a = "E" Or a = "I" Or a = "O" Or a = "U") Then
+
+                MessageBox.Show(TextBox1.Text & " is " & str & " Vowel")
+
+            Else
+
+                MessageBox.Show(TextBox1.Text & " is " & str & " Consonant")
+
+            End If
+
+        End If
+
+    End Sub
+
+ 
+
+    Private Sub TextBox1_Leave(sender As Object, e As EventArgs) Handles TextBox1.Leave
+
+        Dim a As String
+
+        a = TextBox1.Text
+
+        If (TextBox1.Text.Length > 1) Then
+
+            Label2.Text = "Only One Characters Allowed...!"
+
+        Else
+
+            Label2.Text = ""
+
+        End If
+
+ 
+
+    End Sub
+
+End Class
+
+ 
+
+ :
+----------------------------------------
+B) Design a web application form in ASP.Net having loan amount, interest rate and
+
+duration fields. Calculate the simple interest and perform necessary validation i.e.
+
+Ensures data has been entered for each field. Checking for non-numeric value. Assume
+
+suitable web-form controls and perform necessary validation.
+
+-->>>																									

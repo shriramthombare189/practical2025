@@ -1,0 +1,125 @@
+A) Write a JDBC program to delete the details of given employee (ENo EName Salary). Accept employee ID through command line.
+Solution:
+
+import java.util.*;
+import java.sql.*;  //step 1 - import the package
+
+public class DeletePreparedStatement
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	PreparedStatement ps;
+	String query;
+	
+	int a,b;
+	
+	
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Pls Enter ENO");  
+	a=sc.nextInt();
+		
+	
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	query="delete from emp where eno=?"; //step 5 - make the query
+		
+	ps=con.prepareStatement(query);  //step 4 create the statement
+	
+	ps.setInt(1,a);
+	
+	
+	int n=ps.executeUpdate(); // step 6 fire the query
+	if(n>0)
+	System.out.println(n+" RECORDs DELETED SUCCESSFULLY");
+	else
+	System.out.println("RECORD NOT DELETED");
+	
+	ps.close();		//step 7 close the statement and connections
+	con.close();
+	
+	}
+}
+
+-
+-------------------------------------------------------------
+B) Write a java program in multithreading using applet for drawing temple.
+Solution:
+
+import java.applet.*;
+import java.awt.*;
+/* <APPLET     code= "Slip20.class"  width= "500" height= "300">
+     </APPLET> */
+
+public class Slip20 extends Applet implements Runnable
+{
+	
+	public void init()
+	{
+	Thread s=new Thread(this);
+	s.start();
+	}
+	
+	public void run()
+	{
+	repaint();
+	}
+	
+	public void paint(Graphics g)
+	{
+	g.drawLine(400,100,400,300);
+	g.drawRect(400,100,100,100);
+	g.drawLine(400,300,100,500);
+	g.drawLine(400,300,700,500);
+	g.drawRect(100,500,600,300);
+	g.drawRect(350,700,100,100);
+	}
+}
+
+------------------------------------------------
+A) Write a VB.NET program to generate Sample Tree View control.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        TreeView1.Nodes.Add("Master")
+
+        TreeView1.Nodes(0).Nodes.Add("Student Details")
+
+        TreeView1.Nodes(0).Nodes.Add("Teacher Details")
+
+        TreeView1.Nodes.Add("Examination")
+
+        TreeView1.Nodes(1).Nodes.Add("Internal Exam")
+
+        TreeView1.Nodes(1).Nodes.Add("External Exam")
+
+        TreeView1.Nodes(1).Nodes.Add("Practical Exam")
+
+    End Sub
+
+End Class
+
+ :
+
+ 
+----------------------------------------------------------
+B) Write a Web application in ASP.Net that generates the “IndexOutOfRange”
+
+exception when a button is clicked. Instead of displaying the above exception, it
+
+redirects the user to a custom error page. All the above should be done with the trace
+
+for the page being enabled.
+
+Answer :
+
+
+
+-------------------------------

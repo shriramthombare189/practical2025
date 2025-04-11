@@ -1,0 +1,189 @@
+A) Write a java program to display name of currently executing Thread in multithreading.
+Solution:
+
+import java.util.*;
+
+public class Slip13_q1 extends Thread {
+	public void run()
+	{
+		for(int i=0;i<5;i++)
+		{
+			System.out.println("The thread name is "+Thread.currentThread().getName());
+		}
+	}
+
+	public static void main(String []args)
+	{
+		Slip13_q1 t1= new Slip13_q1();
+		t1.setName("Main Thread");
+		t1.start();
+		Thread t2 = currentThread();
+		t2.setName("Current thread");
+		for(int i=0;i<5;i++)
+		{
+			System.out.println("The thread name is "+t1.currentThread().getName());
+		}
+	}
+
+}
+
+----------------------------------------
+B) Write a JSP program to display the details of College (CollegeID, Coll_Name, Address) in tabular form on browser.
+Solution:
+
+Index.html file:
+<html>
+      <head>
+            <title> College Details
+            </title>
+	  </head>
+	  <body>
+	  <form name="f1" method="post" action="college.jsp">
+	 <input type="submit" name="s1" value="Show">	 
+</form>
+ </body>
+</html>
+
+College.jsp file:
+
+<%@page import="java.sql.*"%> 
+
+<%
+if(request.getParameter("s1")!=null)
+  {
+		Connection con;
+		Statement st;
+		String query;
+		ResultSet rs;
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root","");
+		st = con.createStatement();
+		query = "select * from college";
+		rs = st.executeQuery(query);
+%>
+<table border=l> 
+<tr><th>Roll No</th><th>Name</th><th>Address </th></tr> 
+<%
+while(rs.next()) 
+{
+%>
+<tr> 
+<td><%=rs.getInt("Roll No")%></td> 
+<td><%=rs.getString("Name")%></td> 
+<td><%=rs.getString("Address")%></td> 
+</tr> 
+<%
+}
+	st.close();		
+	con.close();
+}
+%>
+ </table>
+------------------------------------
+A) Write a VB.net program for blinking an image.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub Timer1_Tick_1(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        If PictureBox1.Visible Then
+
+            PictureBox1.Visible = False
+
+        Else
+
+            PictureBox1.Visible = True
+
+        End If
+
+    End Sub
+
+ 
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Timer1.Enabled = True
+
+        Timer1.Interval = 1000
+
+        Timer1.Start()
+
+    End Sub
+
+End Class
+
+ 
+
+ :
+-----------------------------------------
+B) Write a C# Program to accept and display ‘n’ student’s details such as Roll. No,
+
+Name, marks in three subjects, using class. Display percentage of each student.
+
+Answer :
+using System;
+
+namespace StudentDetails
+{
+    class Student
+    {
+        public int RollNo { get; set; }
+        public string Name { get; set; }
+        public float Marks1 { get; set; }
+        public float Marks2 { get; set; }
+        public float Marks3 { get; set; }
+
+        public float CalculatePercentage()
+        {
+            float totalMarks = Marks1 + Marks2 + Marks3;
+            return (totalMarks / 300) * 100; // Assuming each subject is out of 100
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of students: ");
+            int n = int.Parse(Console.ReadLine());
+            Student[] students = new Student[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                students[i] = new Student();
+
+                Console.WriteLine($"\nEnter details for student {i + 1}:");
+                Console.Write("Roll No: ");
+                students[i].RollNo = int.Parse(Console.ReadLine());
+
+                Console.Write("Name: ");
+                students[i].Name = Console.ReadLine();
+
+                Console.Write("Marks in Subject 1: ");
+                students[i].Marks1 = float.Parse(Console.ReadLine());
+
+                Console.Write("Marks in Subject 2: ");
+                students[i].Marks2 = float.Parse(Console.ReadLine());
+
+                Console.Write("Marks in Subject 3: ");
+                students[i].Marks3 = float.Parse(Console.ReadLine());
+            }
+
+            Console.WriteLine("\nStudent Details:");
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("Roll No\tName\t\tMarks1\tMarks2\tMarks3\tPercentage");
+            Console.WriteLine("-------------------------------------------------");
+
+            foreach (var student in students)
+            {
+                Console.WriteLine($"{student.RollNo}\t{student.Name}\t{student.Marks1}\t{student.Marks2}\t{student.Marks3}\t{student.CalculatePercentage():F2}%");
+            }
+
+            Console.WriteLine("-------------------------------------------------");
+        }
+    }
+}
+------------------------------------------------

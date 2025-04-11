@@ -1,0 +1,124 @@
+ A) Write a JSP script to validate given E-Mail ID.
+Solution:
+
+<html>
+	<body>
+		<center><br><br>
+		<form action="slip7.jsp" method="GET"><b>
+		Enter The email-ID :</b>
+		<input type=text name=email><br><br>
+		<input type=submit value="SUBMIT">
+		</form>
+		</center>
+	</body>
+</html>
+
+Slip7.jsp
+<html>
+	<body>
+		<font color=red>
+<%@page language="java"%>
+
+<%! int cnt=0; 
+ 	char ch;
+%>
+
+		<%
+			String email=request.getParameter("email");
+						out.print(email+"");
+			for(int i=0;i <email.length();i++)
+			{
+				ch=email.charAt(i);
+				if(ch=='@')
+				{
+				     cnt++;
+				}
+
+				if(ch=='.')
+				{
+				     cnt++;
+						
+				}
+
+			}
+			
+			if(cnt==2)
+				 out.println("Valid Email Id ");	
+			else
+				out.println("InValid Email Id");	
+			%>
+		</font>
+	</body>
+</html>
+------------------------------------------
+
+B) Write a Multithreading program in java to display the number’s between 1 to 100 continuously in a TextField by clicking on button. (use Runnable Interface).
+Solution:
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Slip12 extends Frame implements ActionListener,Runnable
+{
+	Thread y;
+	TextField t;
+	Button b;
+	Slip12()
+	{
+		t=new TextField(20);
+		b=new Button("start");
+		setLayout(new FlowLayout());
+		add(b);
+		add(t);
+		b.addActionListener(this);
+		setSize(300,300);
+		setVisible(true);	
+		y=new Thread(this);
+	}	
+	public void actionPerformed(ActionEvent e)
+	{
+		String msg=e.getActionCommand();
+		if(msg.equals("start"))
+		{
+			y.start();
+		}
+	}
+	public void run()
+	{
+			for(int i=1;i<=100;i++)
+			{
+			t.setText(i+"");
+				try
+				{
+				Thread.sleep(100);
+				}
+				catch(Exception e){}
+		}
+	}
+
+	
+	public static void main(String[] d)
+	{
+		new Slip12();
+	}
+
+}
+--------------------------------
+E) Write a ASP.Net program to accept a number from the user in a textbox control and throw an exception if the number is not a perfect number. Assume suitable controls on the web form.
+-->>>
+
+
+
+
+
+
+
+
+--------------------
+
+E) Write a ASP.Net program to accept a number from the user in a textbox control and throw an exception if the number is not a perfect number. Assume suitable controls on the web form.
+--->>
+
+
+
+------------------------------------

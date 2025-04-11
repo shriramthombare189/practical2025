@@ -1,0 +1,212 @@
+Q1) Write a java program to display list of college names from college table. (Assume College table (CID, CName, addr) is already created.
+
+-->
+CREATE DATABASE college_db;
+
+USE college_db;
+
+CREATE TABLE College (
+    CID INT PRIMARY KEY,
+    CName VARCHAR(100),
+    addr VARCHAR(255)
+);
+
+-- Sample data
+INSERT INTO College (CID, CName, addr) VALUES (1, 'ABC College', '123 Main St, City');
+INSERT INTO College (CID, CName, addr) VALUES (2, 'XYZ University', '456 Elm St, City');
+INSERT INTO College (CID, CName, addr) VALUES (3, 'LMN Institute', '789 Oak St, City');
+
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class CollegeList {
+    // JDBC URL, username, and password of MySQL server
+    private static final String URL = "jdbc:mysql://localhost:3306/college_db";
+    private static final String USER = "root"; // Change to your database username
+    private static final String PASSWORD = "password"; // Change to your database password
+
+    public static void main(String[] args) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // Establishing a connection to the database
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connected to the database.");
+
+            // Creating a statement
+            statement = connection.createStatement();
+
+            // Executing a query to retrieve college names
+            String sql = "SELECT CName FROM College";
+            resultSet = statement.executeQuery(sql);
+
+            // Displaying the college names
+            System.out.println("List of College Names:");
+            while (resultSet.next()) {
+                String collegeName = resultSet.getString("CName");
+                System.out.println(collegeName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Closing resources
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+---------------------------------------------
+Q2) Write a SERVLET program to Design an HTML page containing 4 option buttons (Painting, Drawing, Singing and swimming) and 2 buttons reset and submit. When the user clicks submit, the server responds by adding cookie containing the selected hobby and sends the HTML page to the client. Program should not allow duplicate cookies to be written.
+---->>>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Your Hobby</title>
+</head>
+<body>
+    <h2>Select Your Hobby</h2>
+    <form action="hobbyServlet" method="post">
+        <input type="radio" name="hobby" value="Painting"> Painting<br>
+        <input type="radio" name="hobby" value="Drawing"> Drawing<br>
+        <input type="radio" name="hobby" value="Singing"> Singing<br>
+        <input type="radio" name="hobby" value="Swimming"> Swimming<br><br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
+
+Create the Servlet::
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/hobbyServlet")
+public class HobbyServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get the selected hobby from the request
+        String selectedHobby = request.getParameter("hobby");
+
+        // Set the response content type
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        // Check if the hobby is not null
+        if (selectedHobby != null) {
+            // Check for existing cookies
+            boolean cookieExists = false;
+            Cookie[] cookies = request.getCookies();
+
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("hobby") && cookie.getValue().equals(selectedHobby)) {
+                        cookieExists = true;
+                        break;
+                    }
+                }
+            }
+
+            // If the cookie does not exist, create a new one
+            if (!cookieExists) {
+                Cookie hobbyCookie = new Cookie("hobby", selectedHobby);
+                hobbyCookie.setMaxAge(60 * 60 * 24); // Set cookie to expire in 1 day
+                response.addCookie(hobbyCookie);
+                out.println("<h3>Hobby saved: " + selectedHobby + "</h3>");
+            } else {
+                out.println("<h3>You have already selected this hobby: " + selectedHobby + "</h3>");
+            }
+        } else {
+            out.println("<h3>No hobby selected.</h3>");
+        }
+
+        // Provide a link to go back to the form
+        out.println("<br><a href='hobbyForm.html'>Go back to the form</a>");
+        out.close();
+    }
+}
+
+Configure the Web Application::
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+          version="3.1">
+
+    <servlet>
+        <servlet-name>HobbyServlet</servlet-name>
+        <servlet-class>HobbyServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>HobbyServlet</servlet-name>
+        <url-pattern>/hobbyServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+----------------------------------------
+Q5) Write a program in C#.Net to create a recursive function to find the factorial of a
+given number
+-->
+using System;
+
+class Program
+{
+    // Recursive function to calculate the factorial of a number
+    static long Factorial(int number)
+    {
+        // Base case: factorial of 0 or 1 is 1
+        if (number == 0 || number == 1)
+        {
+            return 1;
+        }
+        else
+        {
+            // Recursive case: number * factorial of (number - 1)
+            return number * Factorial(number - 1);
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        Console.Write("Enter a number to calculate its factorial: ");
+        int number;
+
+        // Validate user input
+        while (!int.TryParse(Console.ReadLine(), out number) || number < 0)
+        {
+            Console.Write("Please enter a valid non-negative integer: ");
+        }
+
+        // Call the Factorial function and display the result
+        long result = Factorial(number);
+        Console.WriteLine($"The factorial of {number} is: {result}");
+    }
+}
+-------------------------------
+Q6) Write a ASP.Net program to create a Login Module which adds Username and
+Password in the database. Username in the database should be a primary key.
+-->
+
+
+--------------------

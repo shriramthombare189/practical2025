@@ -1,0 +1,186 @@
+ A) Write a Java Program to display all the employee names whose initial character of a name is ‘A’.
+Solution:
+import java.sql.*;  //step 1 - import the package
+
+public class selectEmployee
+{
+	public static void main(String args[]) throws Exception
+	{
+	Connection con;
+	Statement st;
+	String query;
+	ResultSet rs;
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	st=con.createStatement();  //step 4 create the statement
+	
+	query="select * from emp where ename like 'A%'"; //step 5 - make the query
+	
+	rs=st.executeQuery(query); // step 6 fire the query
+	while(rs.next())
+	{
+	System.out.println(rs.getInt("eid") + rs.getString("ename") + rs.getInt("esal"));
+	}
+	
+	st.close();		//step 7 close the statement and connections
+	con.close();
+	}
+}
+------------------------------------
+B) Write a java program in multithreading using applet for Digital watch.
+Solution:
+import java.applet.*;  
+import java.awt.*;  
+import java.util.*;  
+import java.text.*;  
+ /* <APPLET code="DigitalClock.class" width="300" height="300" >
+  </APPLET> */
+public class DigitalClock extends Applet implements Runnable {  
+  
+   Thread t = null;  
+   int hours=0, minutes=0, seconds=0;  
+   String timeString = "";  
+  
+   public void init() {  
+      setBackground( Color.green);  
+   }  
+  
+   public void start() {  
+        t = new Thread( this );  
+        t.start();  
+   }  
+  
+    
+   public void run() {  
+      try {  
+         while (true) {  
+  
+            Calendar cal = Calendar.getInstance();  
+            hours = cal.get( Calendar.HOUR_OF_DAY );  
+            if ( hours > 12 ) hours -= 12;  
+            minutes = cal.get( Calendar.MINUTE );  
+            seconds = cal.get( Calendar.SECOND );  
+  
+            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");  
+            Date date = cal.getTime();  
+            timeString = formatter.format( date );  
+  
+            repaint();  
+            t.sleep( 1000 );  // interval given in milliseconds  
+         }  
+      }  
+      catch (Exception e) { }  
+   }  
+  
+    
+  public void paint( Graphics g ) {  
+      g.setColor( Color.blue );  
+      g.drawString( timeString, 50, 50 );  
+   }  
+}
+----------------------------------------------------------
+
+A) List of employees is available in listbox. Write ASP.Net application to add
+
+selected or all records from listbox to Textbox (assume multi-line property of textbox is
+
+ true).
+-->>>
+
+
+
+
+
+------------------------------
+B) Write a c#.Net program for multiplication of matrices
+--->>>
+using System;
+
+namespace MatrixMultiplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Get the dimensions of the matrices
+            int row1, col1, row2, col2;
+
+            // Input for Matrix A
+            Console.WriteLine("Enter the number of rows for Matrix A:");
+            row1 = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the number of columns for Matrix A:");
+            col1 = int.Parse(Console.ReadLine());
+
+            // Input for Matrix B
+            Console.WriteLine("Enter the number of rows for Matrix B:");
+            row2 = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the number of columns for Matrix B:");
+            col2 = int.Parse(Console.ReadLine());
+
+            // Check if multiplication is possible
+            if (col1 != row2)
+            {
+                Console.WriteLine("Matrix multiplication is not possible. The number of columns of Matrix A must be equal to the number of rows of Matrix B.");
+                return;
+            }
+
+            // Declare the matrices
+            int[,] matrixA = new int[row1, col1];
+            int[,] matrixB = new int[row2, col2];
+            int[,] resultMatrix = new int[row1, col2];
+
+            // Input elements of Matrix A
+            Console.WriteLine("\nEnter the elements of Matrix A:");
+            for (int i = 0; i < row1; i++)
+            {
+                for (int j = 0; j < col1; j++)
+                {
+                    Console.Write($"Element [{i+1},{j+1}]: ");
+                    matrixA[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+
+            // Input elements of Matrix B
+            Console.WriteLine("\nEnter the elements of Matrix B:");
+            for (int i = 0; i < row2; i++)
+            {
+                for (int j = 0; j < col2; j++)
+                {
+                    Console.Write($"Element [{i+1},{j+1}]: ");
+                    matrixB[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+
+            // Matrix multiplication logic
+            for (int i = 0; i < row1; i++)
+            {
+                for (int j = 0; j < col2; j++)
+                {
+                    for (int k = 0; k < col1; k++)
+                    {
+                        resultMatrix[i, j] += matrixA[i, k] * matrixB[k, j];
+                    }
+                }
+            }
+
+            // Output the result of the multiplication
+            Console.WriteLine("\nThe resulting matrix is:");
+            for (int i = 0; i < row1; i++)
+            {
+                for (int j = 0; j < col2; j++)
+                {
+                    Console.Write(resultMatrix[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+-----------------------------------

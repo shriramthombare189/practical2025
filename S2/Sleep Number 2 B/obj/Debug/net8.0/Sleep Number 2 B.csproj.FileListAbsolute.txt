@@ -1,0 +1,14 @@
+C:\Users\shrir\source\repos\Sleep Number 2 B\bin\Debug\net8.0\Sleep Number 2 B.exe
+C:\Users\shrir\source\repos\Sleep Number 2 B\bin\Debug\net8.0\Sleep Number 2 B.deps.json
+C:\Users\shrir\source\repos\Sleep Number 2 B\bin\Debug\net8.0\Sleep Number 2 B.runtimeconfig.json
+C:\Users\shrir\source\repos\Sleep Number 2 B\bin\Debug\net8.0\Sleep Number 2 B.dll
+C:\Users\shrir\source\repos\Sleep Number 2 B\bin\Debug\net8.0\Sleep Number 2 B.pdb
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.AssemblyInfoInputs.cache
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.AssemblyInfo.cs
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.csproj.CoreCompileInputs.cache
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.dll
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\refint\Sleep Number 2 B.dll
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.pdb
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\Sleep Number 2 B.genruntimeconfig.cache
+C:\Users\shrir\source\repos\Sleep Number 2 B\obj\Debug\net8.0\ref\Sleep Number 2 B.dll

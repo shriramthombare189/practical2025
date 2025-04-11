@@ -1,0 +1,176 @@
+Q1) Write a JSP script to accept the details of Teacher (TID, TName, Desg, Subject , Qualification) and display it on the browser. Use appropriate controls for accepting
+data.
+-->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Details Form</title>
+</head>
+<body>
+    <h2>Enter Teacher Details</h2>
+    <form action="teacherForm.jsp" method="post">
+        <label for="tid">Teacher ID (TID):</label><br>
+        <input type="text" id="tid" name="tid" required><br><br>
+
+        <label for="tname">Teacher Name (TName):</label><br>
+        <input type="text" id="tname" name="tname" required><br><br>
+
+        <label for="desg">Designation (Desg):</label><br>
+        <input type="text" id="desg" name="desg" required><br><br>
+
+        <label for="subject">Subject:</label><br>
+        <input type="text" id="subject" name="subject" required><br><br>
+
+        <label for="qualification">Qualification:</label><br>
+        <input type="text" id="qualification" name="qualification" required><br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+
+    <%
+        // Process the form submission
+        String tid = request.getParameter("tid");
+        String tname = request.getParameter("tname");
+        String desg = request.getParameter("desg");
+        String subject = request.getParameter("subject");
+        String qualification = request.getParameter("qualification");
+
+        // Check if the form has been submitted
+        if (tid != null && tname != null && desg != null && subject != null && qualification != null) {
+    %>
+        <h3>Teacher Details:</h3>
+        <p><strong>Teacher ID (TID):</strong> <%= tid %></p>
+        <p><strong>Teacher Name (TName):</strong> <%= tname %></p>
+        <p><strong>Designation (Desg):</strong> <%= desg %></p>
+        <p><strong>Subject:</strong> <%= subject %></p>
+        <p><strong>Qualification:</strong> <%= qualification %></p>
+    <%
+        }
+    %>
+</body>
+</html>
+-----------------------------------------
+Q2) Write a Java Program for the implementation of scrollable ResultSet. Assume
+Teacher table with attributes (TID, TName, Salary, Subject) is already created.
+---->>
+CREATE DATABASE school_db;
+
+USE school_db;
+
+CREATE TABLE Teacher (
+    TID INT PRIMARY KEY,
+    TName VARCHAR(100),
+    Salary DECIMAL(10, 2),
+    Subject VARCHAR(100)
+);
+
+-- Sample data
+INSERT INTO Teacher (TID, TName, Salary, Subject) VALUES (1, 'Alice', 50000, 'Mathematics');
+INSERT INTO Teacher (TID, TName, Salary, Subject) VALUES (2, 'Bob', 55000, 'Physics');
+INSERT INTO Teacher (TID, TName, Salary, Subject) VALUES (3, 'Charlie', 60000, 'Chemistry');
+INSERT INTO Teacher (TID, TName, Salary, Subject) VALUES (4, 'David', 65000, 'Biology');
+
+
+import java.sql.*;
+
+public class ScrollableResultSetExample {
+    // JDBC URL, username, and password of MySQL server
+    private static final String URL = "jdbc:mysql://localhost:3306/school_db";
+    private static final String USER = "root"; // Change to your database username
+    private static final String PASSWORD = "password"; // Change to your database password
+
+    public static void main(String[] args) {
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // Establishing a connection to the database
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connected to the database.");
+
+            // Creating a statement with scrollable ResultSet
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            // Executing a query to retrieve teacher data
+            String sql = "SELECT TID, TName, Salary, Subject FROM Teacher";
+            resultSet = statement.executeQuery(sql);
+
+            // Move to the first row and display data
+            if (resultSet.first()) {
+                System.out.println("Displaying Teacher Details:");
+                do {
+                    int tid = resultSet.getInt("TID");
+                    String tname = resultSet.getString("TName");
+                    double salary = resultSet.getDouble("Salary");
+                    String subject = resultSet.getString("Subject");
+
+                    System.out.printf("TID: %d, TName: %s, Salary: %.2f, Subject: %s%n", tid, tname, salary, subject);
+                } while (resultSet.next());
+            } else {
+                System.out.println("No records found.");
+            }
+
+            // Move to the last row and display data
+            if (resultSet.last()) {
+                System.out.println("\nLast Teacher Record:");
+                int tid = resultSet.getInt("TID");
+                String tname = resultSet.getString("TName");
+                double salary = resultSet.getDouble("Salary");
+                String subject = resultSet.getString("Subject");
+
+                System.out.printf("TID: %d, TName: %s, Salary: %.2f, Subject: %s%n", tid, tname, salary, subject);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Closing resources
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+----------------------
+Q5) Write a program in C#.Net to find the length of a string.
+-->
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Prompt the user to enter a string
+        Console.Write("Enter a string: ");
+        string inputString = Console.ReadLine();
+
+        // Calculate the length of the string
+        int length = inputString.Length;
+
+        // Display the length of the string
+        Console.WriteLine($"The length of the entered string is: {length}");
+    }
+}
+------------------------------
+B) Create a web application in ASP.Net which may have a textbox. Now user must type
+
+some data into it, the data he can enter is only 255 characters. After he crosses the limit
+
+then the last word should not by typed and at the same time color of textbox
+
+should be red.
+
+
+
+
+
+
+
+---------------------

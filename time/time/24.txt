@@ -1,0 +1,350 @@
+Q1) Create a JSP page to accept a number from a user and display it in words: Example: 123 – One Two Three. The output should be in red color.
+
+------>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number to Words Converter</title>
+    <style>
+        .output {
+            color: red; /* Set the text color to red */
+        }
+    </style>
+</head>
+<body>
+    <h2>Number to Words Converter</h2>
+    <form method="post">
+        Enter a number: <input type="text" name="number" required>
+        <input type="submit" value="Convert">
+    </form>
+
+    <%
+        // Function to convert number to words
+        String numberToWords(int number) {
+            String[] units = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" };
+            String[] teens = { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+            String[] tens = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+
+            if (number == 0) {
+                return "Zero";
+            }
+
+            String words = "";
+
+            if (number >= 100) {
+                words += units[number / 100] + " Hundred ";
+                number %= 100;
+            }
+
+            if (number >= 20) {
+                words += tens[number / 10] + " ";
+                number %= 10;
+            } else if (number >= 10) {
+                words += teens[number - 10] + " ";
+                return words.trim();
+            }
+
+            if (number > 0) {
+                words += units[number] + " ";
+            }
+
+            return words.trim();
+        }
+
+        // Process the form submission
+        String numberStr = request.getParameter("number");
+        if (numberStr != null) {
+            try {
+                int number = Integer.parseInt(numberStr);
+                String words = numberToWords(number);
+                out.println("<div class='output'>");
+                out.println("Number in words: " + words);
+                out.println("</div>");
+            } catch (NumberFormatException e) {
+                out.println("<div class='output'>");
+                out.println("Please enter a valid integer.");
+                out.println("</div>");
+            }
+        }
+    %>
+</body>
+</html>
+---------------------
+Write a menu driven program in Java for the following: Assume Emp table with attributes ( ENo, EName, salary, Desg ) is already created. 
+1. Insert 
+2. Update 
+3. Delete 
+4. Search 
+5. Display 
+6. Exit.
+-->
+import java.sql.*;
+import java.util.Scanner;
+
+public class EmployeeManagement {
+
+    // JDBC URL, username, and password of MySQL server
+    private static final String URL = "jdbc:mysql://localhost:3306/company";
+    private static final String USER = "root"; // Change to your database username
+    private static final String PASSWORD = "password"; // Change to your database password
+
+    // JDBC variables for opening and managing connection
+    private static Connection connection;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+
+        try {
+            // Establishing a connection to the database
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connected to the database.");
+
+            do {
+                System.out.println("\nMenu:");
+                System.out.println("1. Insert");
+                System.out.println("2. Update");
+                System.out.println("3. Delete");
+                System.out.println("4. Search");
+                System.out.println("5. Display");
+                System.out.println("6. Exit");
+                System.out.print("Enter your choice: ");
+                choice = scanner.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        insertEmployee(scanner);
+                        break;
+                    case 2:
+                        updateEmployee(scanner);
+                        break;
+                    case 3:
+                        deleteEmployee(scanner);
+                        break;
+                    case 4:
+                        searchEmployee(scanner);
+                        break;
+                    case 5:
+                        displayEmployees();
+                        break;
+                    case 6:
+                        System.out.println("Exiting...");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            } while (choice != 6);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            scanner.close();
+        }
+    }
+
+    private static void insertEmployee(Scanner scanner) {
+        System.out.print("Enter Employee Number (ENo): ");
+        int eNo = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter Employee Name (EName): ");
+        String eName = scanner.nextLine();
+        System.out.print("Enter Salary: ");
+        double salary = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter Designation (Desg): ");
+        String desg = scanner.nextLine();
+
+        String sql = "INSERT INTO Emp (ENo, EName, Salary, Desg) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, eNo);
+            statement.setString(2, eName);
+            statement.setDouble(3, salary);
+            statement.setString(4, desg);
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Employee inserted successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void updateEmployee(Scanner scanner) {
+        System.out.print("Enter Employee Number (ENo) to update: ");
+        int eNo = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter new Employee Name (EName): ");
+        String eName = scanner.nextLine();
+        System.out.print("Enter new Salary: ");
+        double salary = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter new Designation (Desg): ");
+        String desg = scanner.nextLine();
+
+        String sql = "UPDATE Emp SET EName = ?, Salary = ?, Desg = ? WHERE ENo = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, eName);
+            statement.setDouble(2, salary);
+            statement.setString(3, desg);
+            statement.setInt(4
+
+
+CREATE DATABASE company;
+
+USE company;
+
+CREATE TABLE Emp (
+    ENo INT PRIMARY KEY,
+    EName VARCHAR(50),
+    Salary DECIMAL(10, 2),
+    Desg VARCHAR(50)
+);
+-------------------------------------------
+Q5) Write a program in C#.Net to create a function to check whether a nu
+using System;
+
+class Program
+{
+    // Function to check if a number is prime
+    static bool IsPrime(int number)
+    {
+        // Handle edge cases
+        if (number <= 1) return false; // 0 and 1 are not prime numbers
+        if (number == 2) return true;  // 2 is the only even prime number
+        if (number % 2 == 0) return false; // Exclude even numbers greater than 2
+
+        // Check for factors from 3 to the square root of the number
+        for (int i = 3; i <= Math.Sqrt(number); i += 2)
+        {
+            if (number % i == 0)
+            {
+                return false; // Found a factor, not prime
+            }
+        }
+        return true; // No factors found, it is prime
+    }
+
+    static void Main(string[] args)
+    {
+        Console.Write("Enter a number to check if it is prime: ");
+        int number;
+
+        // Validate user input
+        while (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.Write("Please enter a valid integer: ");
+        }
+
+        // Call the IsPrime function and display the result
+        if (IsPrime(number))
+        {
+            Console.WriteLine($"{number} is a prime number.");
+        }
+        else
+        {
+            Console.WriteLine($"{number} is not a prime number.");
+        }
+    }
+}
+----------------------------------------
+B) Write a VB.NET program to create Author table (aid, aname, book_ name). Insert the
+
+records (Max 5). Delete a record of author who has written “VB.NET book” and
+
+display remaining records on the data grid view. (Use MS Access to create db.)
+
+Answer :
+
+Imports System.Data.OleDb
+
+Public Class Form1
+
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Saurabh\Desktop\New folder\Author.accdb")
+
+    Dim adpt As New OleDbDataAdapter("Select * from Author", con)
+
+    Dim cmd As New OleDbCommand
+
+    Dim ds As New DataSet
+
+    Public Function display()
+
+        adpt.Fill(ds, "Author")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "Author"
+
+        Return ds
+
+    End Function
+
+ 
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "insert into Author values(" & TextBox1.Text & ",'" & TextBox2.Text & "','" & TextBox3.Text & "')"
+
+        con.Open()
+
+        If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Inserted Successfully...!")
+
+        End If
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "DELETE FROM Author WHERE book_name='" & TextBox3.Text & "'"
+
+        con.Open()
+
+        If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Deleted Successfully...!")
+
+        End If
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+End Class

@@ -1,0 +1,236 @@
+ A) Write a java program to display each alphabet after 2 seconds between ‘a’ to ‘z’.
+_--->>
+public class AlphabetDisplay {
+    public static void main(String[] args) {
+        // Loop through characters from 'a' to 'z'
+        for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
+            System.out.print(alphabet + " "); // Print the current alphabet
+            try {
+                Thread.sleep(2000); // Sleep for 2000 milliseconds (2 seconds)
+            } catch (InterruptedException e) {
+                System.out.println("Thread was interrupted: " + e.getMessage());
+            }
+        }
+    }
+}
+-----------------------------
+B) Write a Java program to accept the details of Student (RNo, SName, Per, Gender, Class) and store into the database. (Use appropriate Swing Components and PreparedStatement Interface).
+Solution:
+
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+
+class StudendAwtJdbc extends Frame implements ActionListener
+{
+Label l1,l2,l3,l4;
+TextField t1,t2,t3;
+Button b1;
+
+public StudendAwtJdbc()
+{
+setLayout(null);
+setSize(800,600);
+setTitle("Insert Record");
+setVisible(true);
+
+l1=new Label("ENTER ENO");
+l1.setBounds(100,100,300,50);
+add(l1);
+
+l2=new Label("ENTER ENAME");
+l2.setBounds(100,200,300,50);
+add(l2);
+
+l3=new Label("ENTER SAL");
+l3.setBounds(100,300,300,50);
+add(l3);
+
+l4=new Label("ANSWERS");
+l4.setBounds(50,50,300,50);
+add(l4);
+
+t1=new TextField();
+t1.setBounds(500,100,200,50);
+add(t1);
+
+t2=new TextField();
+t2.setBounds(500,200,200,50);
+add(t2);
+
+t3=new TextField();
+t3.setBounds(500,300,200,50);
+add(t3);
+
+b1=new Button("SEARCH");
+b1.setBounds(300,400,200,50);
+add(b1);
+b1.addActionListener(this);
+
+}
+
+public void actionPerformed(ActionEvent ae)
+{
+	String cap=ae.getActionCommand();
+	if(cap.equals("SEARCH"))
+	{
+		try
+		{
+	Connection con;
+	PreparedStatement ps;
+	String query;
+	
+	ResultSet rs;
+	
+	
+	int a;
+	a=Integer.parseInt(t1.getText());
+	
+	Class.forName("com.mysql.jdbc.Driver");  //step 2 load & register the db driver
+	
+	con=DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root",""); //step 3 create the connection
+	
+	query="select * from emp where eno like ?"; //step 5 - make the query
+		
+	ps=con.prepareStatement(query);  //step 4 create the statement
+	
+	ps.setInt(1,a);
+	
+	
+	rs=ps.executeQuery(); // step 6 fire the query
+	if(rs.next())
+	{
+	t2.setText(rs.getString("ename"));
+	t3.setText(rs.getFloat("sal")+"");
+	}
+	
+	ps.close();		//step 7 close the statement and connections
+	con.close();
+ 		}catch(Exception e){}
+		
+	}
+	}
+}
+
+
+
+public class SelectStudentMain
+{
+	public static void main(String args[])
+	{
+	new StudendAwtJdbc();
+	}
+}
+
+------------------------------------------------------------
+A) Write ASP.Net application to create a user control that contains a list of colors. Add
+
+a button to the Web Form which when clicked changes the color of the form to the
+
+color selected from the list.
+
+Answer :
+
+Public Class Form1
+
+    Private Sub RedToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RedToolStripMenuItem.Click
+
+        Me.BackColor = Color.Red
+
+    End Sub
+
+ 
+
+    Private Sub GreenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GreenToolStripMenuItem.Click
+
+        Me.BackColor = Color.Green
+
+    End Sub
+
+ 
+
+    Private Sub BlueToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BlueToolStripMenuItem.Click
+
+        Me.BackColor = Color.Blue
+
+    End Sub
+
+End Class
+
+ ------------------------------------------------------
+B) Write a C#.Net Program to accept and display ‘n’ customer’s details such as
+
+customer_no, Name, address ,itemno, quantity price . Display total price of all item.
+-->>>>
+using System;
+
+namespace CustomerDetails
+{
+    class Customer
+    {
+        public int CustomerNo { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public int ItemNo { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+
+        // Method to calculate total price for this customer
+        public decimal TotalPrice()
+        {
+            return Quantity * Price;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter the number of customers: ");
+            int n = int.Parse(Console.ReadLine());
+            Customer[] customers = new Customer[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                customers[i] = new Customer();
+
+                Console.WriteLine($"\nEnter details for Customer {i + 1}:");
+                Console.Write("Customer No: ");
+                customers[i].CustomerNo = int.Parse(Console.ReadLine());
+
+                Console.Write("Name: ");
+                customers[i].Name = Console.ReadLine();
+
+                Console.Write("Address: ");
+                customers[i].Address = Console.ReadLine();
+
+                Console.Write("Item No: ");
+                customers[i].ItemNo = int.Parse(Console.ReadLine());
+
+                Console.Write("Quantity: ");
+                customers[i].Quantity = int.Parse(Console.ReadLine());
+
+                Console.Write("Price per item: ");
+                customers[i].Price = decimal.Parse(Console.ReadLine());
+            }
+
+            // Display all customer details and calculate total price
+            decimal grandTotal = 0;
+            Console.WriteLine("\nCustomer Details:");
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("Customer No\tName\t\tAddress\t\tItem No\tQuantity\tPrice\tTotal Price");
+            Console.WriteLine("-------------------------------------------------");
+
+            foreach (var customer in customers)
+            {
+                decimal totalPrice = customer.TotalPrice();
+                grandTotal += totalPrice;
+                Console.WriteLine($"{customer.CustomerNo}\t\t{customer.Name}\t{customer.Address}\t{customer.ItemNo}\t\t{customer.Quantity}\t\t{customer.Price:C}\t{totalPrice:C}");
+            }
+
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine($"Grand Total Price of all items: {grandTotal:C}");
+        }
+    }
+}
+---------------------------------

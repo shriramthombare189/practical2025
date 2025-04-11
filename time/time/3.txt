@@ -1,0 +1,277 @@
+A) Write a socket program in Java to check whether given number is prime or not. Display result on client terminal.
+Solution:
+
+Server code:
+package IshaPro;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+class IshaPrimeServer    
+{
+public static void main(String args[])      
+{
+
+  try{
+      ServerSocket ss = new ServerSocket(8420);   
+      //Print server is started
+      System.out.println("Server Started...............");
+      //Accept method
+      Socket s = ss.accept();
+      //For accepting characters take information
+      DataInputStream in = new DataInputStream(s.getInputStream()); 
+      //Store the number in x variable
+      int x = in.readInt(); 
+      //To print information Characters UTC Encoded
+      DataOutputStream otc = new DataOutputStream(s.getOutputStream());
+      int flag=0;    //store in y variable
+      
+      for(int i = 2; i < x; i++)
+      { 
+        if(x % i == 0)  
+        { 
+          flag=1;
+          //otc.writeUTF(x + " is Prime");
+        }
+      } 
+      if(flag==0) {
+        otc.writeUTF(x + " is Prime");
+      }
+      else
+      {
+        otc.writeUTF(x + " is not Prime");
+      }
+    } catch(Exception e)  //Catch your exception
+    {
+      System.out.println(e.toString());
+    }
+  }
+}
+Client code:
+package IshaPro;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
+
+class IshaPrimeClient 
+{
+    public static void main(String args[])   
+    {
+        try
+        {
+            Socket cs = new Socket("LocalHost", 8420); 
+            
+            BufferedReader infu = new BufferedReader(new InputStreamReader(System.in)); 
+
+            System.out.println("Enter a number : ");
+
+            int a = Integer.parseInt(infu.readLine());  
+
+            DataOutputStream out = new DataOutputStream(cs.getOutputStream());   
+
+            out.writeInt(a);
+
+            DataInputStream in = new DataInputStream(cs.getInputStream()); 
+            
+            System.out.println(in.readUTF());
+            
+            cs.close();          }
+        catch(Exception e)
+        {
+            System.out.println(e.toString()); 
+        }
+    }
+}
+-----------------------------------------------------------
+ B) Write a java program using applet for bouncing ball, for each bounce color of ball should change randomly.
+Solution:
+
+import java.awt.*;
+import java.applet.*;
+
+public class BounceBall extends Applet implements Runnable
+{
+	int x,y;
+	int dy;
+	 
+	
+	public void init()
+	{
+		x=140;
+		y=40;
+		dy=30;
+		Thread t=new Thread(this);
+		t.start();
+	}
+	public void run()
+	{
+		while(true)
+		{
+			
+			if(y<40||y>260)
+			{
+				dy=-dy;
+			}
+			
+			y=y+dy;
+			
+			try
+			{
+				Thread.sleep(800);
+			}		
+			catch(Exception e){}
+			repaint();
+		}
+	}
+	public void paint(Graphics g)
+	{
+		
+		g.fillRect(10,10,330,300);
+		if(y>260)
+		g.setColor(new Color((int)(Math.random() * 1000)));
+		else
+		g.setColor(Color.red);
+	
+		g.fillOval(x,y,30,30);
+	}
+}
+---------------------------------------
+A) Write a program in C# .Net to create a function for the sum of two numbers.
+
+Answer :
+
+namespace WinFormsApp18
+
+{
+
+    public partial class Form1 : Form
+
+    {
+
+        public Form1()
+
+        {
+
+            InitializeComponent();
+
+        }
+
+        public static int Sum(int a, int b)
+
+        {
+
+            return a + b;
+
+        }
+
+ 
+
+        private void button1_Click(object sender, EventArgs e){
+
+           
+
+            int a = Convert .ToInt32 (textBox1.Text);
+
+            int b = Convert .ToInt32 (textBox2.Text);
+
+            int c =  Sum (a, b);
+
+            label5.Text = c.ToString();
+
+        }
+
+    }
+
+}
+
+ :
+------------------------
+B) Write a VB.NET program to create teacher table (Tid, TName, subject) Insert the
+
+ records (Max: 5). Search record of a teacher whose name is “Seeta” and display result.
+
+Answer :
+
+Imports System
+
+Imports System.Data
+
+Imports System.Data.OleDb
+
+ 
+
+Public Class Form1
+
+    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Saurabh\Desktop\New folder\teacher.accdb")
+
+    Dim adpt As New OleDbDataAdapter("Select * from teacher", con)
+
+    Dim cmd As New OleDbCommand
+
+    Dim ds As New DataSet
+
+    Public Function display()
+
+        adpt.Fill(ds, "teacher")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "teacher"
+
+        Return ds
+
+    End Function
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        cmd.Connection = con
+
+        cmd.CommandType = CommandType.Text
+
+        cmd.CommandText = "insert into teacher values(" & TextBox1.Text & ",'" & TextBox2.Text & "','" & TextBox3.Text & "')"
+
+        con.Open()
+
+  If cmd.ExecuteNonQuery() Then
+
+            MessageBox.Show("Inserted Successfully...!")
+
+        End If
+
+        con.Close()
+
+        ds.Clear()
+
+        display()
+
+    End Sub
+
+ 
+
+    Private Sub TextBox4_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox4.KeyDown
+
+        ds.Clear()
+
+        Dim adp As New OleDbDataAdapter("select * from teacher Where Name like '%" & TextBox4.Text & "%'", con)
+
+        adp.Fill(ds, "search")
+
+        DataGridView1.DataSource = ds
+
+        DataGridView1.DataMember = "search"
+
+    End Sub
+
+End Class
